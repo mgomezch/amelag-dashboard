@@ -50,12 +50,19 @@
 
   const I18N = {
     de: {
-      docTitle: 'AMELAG Abwassermonitor | Robert Koch-Institut & UBA Abwassersurveillance',
-      brandTitle: 'Abwassersurveillance Deutschland',
-      brandSub: 'Robert Koch-Institut &amp; Umweltbundesamt • Datenstand:',
-      rkiDataset: 'RKI Datensatz',
+      docTitle: 'Inoffizieller Abwassermonitor Deutschland | Private Open-Data-Visualisierung',
+      brandBadge: 'Inoffiziell',
+      brandTitle: 'Abwassermonitor Deutschland',
+      brandSub: 'Inoffizielles Dashboard • Datenquelle: RKI &amp; UBA Open Data • Stand:',
+      rkiDataset: 'RKI Originaldaten (GitHub)',
       themeToggle: 'Farbschema wechseln',
       skipLink: 'Zum Hauptinhalt springen',
+      disclaimerAria: 'Wichtiger Hinweis und Haftungsausschluss',
+      disclaimerBadge: '⚠️ WICHTIGER HINWEIS &amp; HAFTUNGSAUSSCHLUSS',
+      disclaimerTitle: 'Inoffizielles, ungeprüftes Hobby-Projekt – Keinerlei institutionelle Zugehörigkeit',
+      disclaimerP1: '<strong>Dieses Dashboard ist ein rein privates, unüberprüftes Freizeitprojekt von Manuel Gómez und steht in KEINERLEI Verbindung oder Kooperation mit dem Robert Koch-Institut (RKI), dem Umweltbundesamt (UBA) oder sonstigen staatlichen Stellen.</strong>',
+      disclaimerP2: 'Es wird keinerlei Gewähr, Haftung oder Garantie für die Richtigkeit, Aktualität, Vollständigkeit oder Verlässlichkeit der hier dargestellten Grafiken, Auswertungen und Berechnungen übernommen. <strong>Niemand sollte sich auf die Inhalte dieser Website verlassen</strong> oder darauf basierende medizinische, gesundheitliche, politische oder sonstige Entscheidungen treffen.',
+      disclaimerP3: 'Für verlässliche epidemiologische Lageberichte, offizielle Bewertungen und valide Daten <strong>konsultieren Sie bitte ausschließlich die Primärquellen der offiziellen Behörden</strong>: insbesondere das offizielle <a href="https://github.com/robert-koch-institut/Abwassersurveillance_AMELAG" target="_blank" rel="noopener noreferrer">RKI AMELAG GitHub-Repository</a> sowie die <a href="https://www.rki.de/abwassersurveillance" target="_blank" rel="noopener noreferrer">RKI-Themenseite Abwassersurveillance</a>. <strong>Vertrauen Sie diesem inoffiziellen Dashboard nicht.</strong>',
       kpiUnit: 'Genkopien/L',
       vsPrevWeek: 'vs. Vorwoche',
       peak: 'Peak:',
@@ -110,7 +117,7 @@
         'COMPARE_ALL': '⚡ Multi-Vergleich (SARS + Flu + RSV)'
       },
       chartTitlePrefix: 'Bundesweite Viruslast im Abwasser',
-      chartSub: 'GAM-Modellierte Trends &amp; 95%-Konfidenzintervall • Quelle: RKI/UBA AMELAG',
+      chartSub: 'GAM-Modellierte Trends &amp; 95%-Konfidenzintervall • Datenquelle: RKI/UBA AMELAG Open Data',
       chartScaleLinear: 'Lineare Skala (Genkopien / Liter)',
       chartScaleLog: 'Logarithmische Skala (Log₁₀)',
       legendFlu: 'Grippe (Flu A+B)',
@@ -137,22 +144,33 @@
       thCurrentVal: 'Aktuell (Kopien/L)',
       thSitesCov: 'Klärwerke (Abdeckung)',
       thHistPeak: 'Historischer Peak',
-      methodHeading: 'Über den AMELAG-Datensatz &amp; Methodik',
+      methodHeading: 'Über die Datenquelle &amp; Inoffizielles Projekt',
+      methodIntro: 'Die hier visualisierten Messwerte entstammen den frei zugänglichen Rohdaten des <strong>AMELAG</strong>-Projekts (<em>Abwassersurveillance zur epidemiologischen Lagebewertung</em>), einer gemeinsamen Initiative des <strong>Robert Koch-Instituts (RKI)</strong> und des <strong>Umweltbundesamtes (UBA)</strong>. <strong>Wichtiger Hinweis:</strong> Diese Website ist ein rein privates, ungeprüftes Hobbyprojekt von Manuel Gómez und steht in <em>keinerlei Verbindung</em> oder Partnerschaft mit dem Robert Koch-Institut oder dem Umweltbundesamt. Die Aufbereitung erfolgt ohne Gewähr und stellt keine offizielle Bewertung oder Berichterstattung dar.',
       whyScalesHeading: 'Warum lineare und logarithmische Darstellung?',
+      whyScalesLi1: '<strong>Lineare Skala:</strong> Zeigt die tatsächliche physikalische Konzentration von Viren im Abwasser. Verdeutlicht das absolute Ausmaß großer Infektionswellen im Vergleich zu niedrigen Grundbelastungen.',
+      whyScalesLi2: '<strong>Logarithmische Skala (Log₁₀):</strong> Da sich Viren in Ausbruchsphasen exponentiell vermehren, wird exponentielles Wachstum als Gerade mit konstanter Steigung sichtbar. Dies erleichtert die Früherkennung von Trends und ermöglicht den direkten Vergleich von Erregern mit stark unterschiedlichen Basiskonzentrationen.',
       normGamHeading: 'Normalisierung und GAM-Modellierung',
-      licenseText: '<strong>Datenlizenz:</strong> Die Rohdaten stehen unter der Lizenz <a href="https://creativecommons.org/licenses/by/4.0/deed.de" target="_blank" rel="noopener noreferrer">Creative Commons Namensnennung 4.0 International (CC BY 4.0)</a> bzw. Datenlizenz Deutschland – Namensnennung – Version 2.0. Quelle: Robert Koch-Institut (RKI) &amp; Umweltbundesamt (UBA), Zenodo Datensatz AMELAG.',
-      footerText: 'AMELAG Abwassermonitor • Statische Webapplikation für GitHub Pages • Entwickelt mit barrierefreiem Fallback für Low-Performance &amp; Terminal-Browser.',
-      footerOrig: 'Original RKI Repository',
-      footerInfo: 'RKI Fachinformation',
-      footerUba: 'Umweltbundesamt'
+      normGamP: 'Um Schwankungen durch Niederschläge, Schneeschmelzen oder gewerbliche Einleitungen auszugleichen, wird die gemessene Viruslast anhand des Kläranlagenzuflusses normalisiert. Ein Generalized Additive Model (GAM) mit adaptiver Spline-Glättung berechnet den übergeordneten Trend mit hoher Robustheit gegen statistisches Messrauschen.',
+      licenseText: '<strong>Datenquelle &amp; Lizenzierung:</strong> Die zugrundeliegenden Rohdaten stammen aus den offenen Veröffentlichungen von RKI/UBA und sind unter der Lizenz <a href="https://creativecommons.org/licenses/by/4.0/deed.de" target="_blank" rel="noopener noreferrer">Creative Commons Namensnennung 4.0 International (CC BY 4.0)</a> bzw. dl-de/by-2-0 lizenziert. Dieses Web-Dashboard ist eine unabhängige, inoffizielle Visualisierung und wurde nicht von den Urhebern geprüft oder autorisiert.',
+      footerText: 'Inoffizieller Abwassermonitor Deutschland • Privates, unüberprüftes Freizeitprojekt von Manuel Gómez • Keine Verbindung zum Robert Koch-Institut, Umweltbundesamt oder offiziellen Behörden.',
+      footerOrig: 'Original RKI-Datenbestand (GitHub)',
+      footerInfo: 'Offizielle RKI-Webseite',
+      footerUba: 'Umweltbundesamt (UBA)'
     },
     en: {
-      docTitle: 'AMELAG Wastewater Monitor | Robert Koch Institute & UBA Wastewater Surveillance',
-      brandTitle: 'Wastewater Surveillance Germany',
-      brandSub: 'Robert Koch Institute &amp; Federal Environment Agency • As of:',
-      rkiDataset: 'RKI Dataset',
+      docTitle: 'Unofficial Wastewater Monitor Germany | Private Open Data Visualization',
+      brandBadge: 'Unofficial',
+      brandTitle: 'Wastewater Monitor Germany',
+      brandSub: 'Unofficial Dashboard • Data Source: RKI &amp; UBA Open Data • As of:',
+      rkiDataset: 'RKI Original Data (GitHub)',
       themeToggle: 'Switch Theme',
       skipLink: 'Skip to main content',
+      disclaimerAria: 'Important Notice and Disclaimer',
+      disclaimerBadge: '⚠️ IMPORTANT NOTICE &amp; DISCLAIMER',
+      disclaimerTitle: 'Unofficial, Unverified Hobby Project – Not Affiliated with Any Institution',
+      disclaimerP1: '<strong>This dashboard is an entirely private, unverified personal project by Manuel Gómez and is in NO WAY affiliated with, endorsed by, or operated by the Robert Koch Institute (RKI), the German Environment Agency (UBA), or any official health authority or institution.</strong>',
+      disclaimerP2: 'No warranty or guarantee whatsoever is provided regarding the accuracy, timeliness, completeness, or reliability of any visualisations, numbers, or calculations shown here. <strong>Nobody should rely on the contents of this website</strong> for medical, health, public policy, legal, or other decision-making purposes.',
+      disclaimerP3: 'For reliable epidemiological information, official assessments, or decision-making, <strong>please consult the original primary sources published by the official authorities</strong>: specifically the official <a href="https://github.com/robert-koch-institut/Abwassersurveillance_AMELAG" target="_blank" rel="noopener noreferrer">RKI AMELAG GitHub repository</a> and the <a href="https://www.rki.de/abwassersurveillance" target="_blank" rel="noopener noreferrer">RKI Wastewater Surveillance page</a>. <strong>Do not rely on or trust this unofficial dashboard.</strong>',
       kpiUnit: 'Gene copies/L',
       vsPrevWeek: 'vs. previous week',
       peak: 'Peak:',
@@ -207,7 +225,7 @@
         'COMPARE_ALL': '⚡ Multi-Comparison (SARS + Flu + RSV)'
       },
       chartTitlePrefix: 'National Viral Load in Wastewater',
-      chartSub: 'GAM-Modeled Trends &amp; 95% Confidence Interval • Source: RKI/UBA AMELAG',
+      chartSub: 'GAM-Modeled Trends &amp; 95% Confidence Interval • Data Source: RKI/UBA AMELAG Open Data',
       chartScaleLinear: 'Linear Scale (Gene copies / Liter)',
       chartScaleLog: 'Logarithmic Scale (Log₁₀)',
       legendFlu: 'Influenza (Flu A+B)',
@@ -234,13 +252,17 @@
       thCurrentVal: 'Current (copies/L)',
       thSitesCov: 'Plants (Coverage)',
       thHistPeak: 'Historical Peak',
-      methodHeading: 'About the AMELAG Dataset &amp; Methodology',
+      methodHeading: 'About the Data Source &amp; Unofficial Project',
+      methodIntro: 'The measurements visualized here originate from the public open data of the <strong>AMELAG</strong> project (<em>Wastewater Surveillance for Epidemiological Situation Assessment</em>), a joint initiative by the <strong>Robert Koch Institute (RKI)</strong> and the <strong>German Environment Agency (UBA)</strong>. <strong>Important:</strong> This website is an entirely private, unverified hobby project by Manuel Gómez and has <em>no affiliation</em>, endorsement, or connection with the Robert Koch Institute or the German Environment Agency. Visualisations are provided as-is without any warranty and do not represent official statements or assessments.',
       whyScalesHeading: 'Why Linear and Logarithmic Visualization?',
+      whyScalesLi1: '<strong>Linear Scale:</strong> Shows the actual physical concentration of viruses in wastewater, illustrating the absolute scale of major infection waves compared to low baseline periods.',
+      whyScalesLi2: '<strong>Logarithmic Scale (Log₁₀):</strong> Because viruses replicate exponentially during the early phase of an outbreak, exponential growth appears as a straight line with constant slope. This facilitates early trend detection and enables simultaneous comparison of pathogens with widely differing baselines (e.g. SARS-CoV-2 vs. RSV).',
       normGamHeading: 'Normalization and GAM Modeling',
-      licenseText: '<strong>Data License:</strong> Raw data is licensed under <a href="https://creativecommons.org/licenses/by/4.0/" target="_blank" rel="noopener noreferrer">Creative Commons Attribution 4.0 International (CC BY 4.0)</a> / Data License Germany – Attribution – Version 2.0. Source: Robert Koch Institute (RKI) &amp; Federal Environment Agency (UBA), Zenodo AMELAG dataset.',
-      footerText: 'AMELAG Wastewater Monitor • Static Web Application for GitHub Pages • Built with accessible fallback for low-performance &amp; terminal browsers.',
-      footerOrig: 'Original RKI Repository',
-      footerInfo: 'RKI Technical Information',
+      normGamP: 'To compensate for variations caused by precipitation, snowmelt, or industrial inflows, measured viral loads are normalized by plant wastewater flow. A Generalized Additive Model (GAM) with adaptive spline smoothing is then applied to extract the underlying epidemiological trend with high resilience against individual measurement noise.',
+      licenseText: '<strong>Data Source &amp; Licensing:</strong> The underlying raw data originates from the public open-data repository of RKI/UBA and is licensed under <a href="https://creativecommons.org/licenses/by/4.0/" target="_blank" rel="noopener noreferrer">Creative Commons Attribution 4.0 International (CC BY 4.0)</a> / dl-de/by-2-0. This web dashboard is a completely independent, unofficial visualization and is neither published nor vetted by the data authors.',
+      footerText: 'Unofficial Wastewater Monitor Germany • Private, unverified personal project by Manuel Gómez • Not affiliated with the Robert Koch Institute, Federal Environment Agency, or government authorities.',
+      footerOrig: 'Original RKI Data Repository (GitHub)',
+      footerInfo: 'Official RKI Web Page',
       footerUba: 'German Environment Agency (UBA)'
     }
   };
@@ -418,8 +440,10 @@
     // All elements with data-i18n
     document.querySelectorAll('[data-i18n]').forEach(el => {
       const key = el.dataset.i18n;
-      if (t[key] !== undefined) {
-        el.innerHTML = t[key];
+      const camelKey = key.replace(/_([a-z0-9])/g, (_, letter) => letter.toUpperCase());
+      const val = t[key] !== undefined ? t[key] : t[camelKey];
+      if (val !== undefined) {
+        el.innerHTML = val;
       }
     });
 

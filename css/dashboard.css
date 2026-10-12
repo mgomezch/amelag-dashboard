@@ -218,6 +218,11 @@ body {
   box-shadow: 0 2px 4px rgba(79, 70, 229, 0.3);
 }
 
+.brand-badge-unofficial {
+  background: linear-gradient(135deg, #d97706, #dc2626);
+  box-shadow: 0 2px 4px rgba(217, 119, 6, 0.35);
+}
+
 .brand-title {
   font-size: 1.25rem;
   font-weight: 700;
@@ -822,7 +827,7 @@ body {
 .font-bold { font-weight: 700; }
 .text-muted { color: var(--text-muted); }
 
-/* Alerts */
+/* Alerts & Disclaimers */
 .alert {
   padding: 0.85rem 1rem;
   border-radius: var(--radius-md);
@@ -835,6 +840,125 @@ body {
   background-color: var(--primary-light);
   color: var(--primary-hover);
   border-color: var(--primary);
+}
+
+/* Unofficial Project Disclaimer Banner */
+.disclaimer-banner {
+  background-color: #fef3c7;
+  border: 2px solid #f59e0b;
+  border-left: 8px solid #d97706;
+  border-radius: var(--radius-lg);
+  padding: 1.25rem 1.5rem;
+  margin-top: 1.25rem;
+  margin-bottom: 1.5rem;
+  color: #78350f;
+  box-shadow: 0 4px 6px -1px rgba(217, 119, 6, 0.15), 0 2px 4px -2px rgba(217, 119, 6, 0.1);
+}
+
+[data-theme="dark"] .disclaimer-banner,
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) .disclaimer-banner {
+    background-color: rgba(245, 158, 11, 0.14);
+    border-color: #d97706;
+    border-left-color: #f59e0b;
+    color: #fef3c7;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
+  }
+}
+
+.disclaimer-header {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.75rem;
+  margin-bottom: 0.85rem;
+}
+
+.disclaimer-badge {
+  background-color: #d97706;
+  color: #ffffff;
+  font-weight: 800;
+  font-size: 0.75rem;
+  letter-spacing: 0.05em;
+  padding: 0.35rem 0.65rem;
+  border-radius: var(--radius-sm);
+  text-transform: uppercase;
+}
+
+[data-theme="dark"] .disclaimer-badge,
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) .disclaimer-badge {
+    background-color: #f59e0b;
+    color: #451a03;
+  }
+}
+
+.disclaimer-title {
+  font-size: 1.1rem;
+  font-weight: 800;
+  color: #92400e;
+  margin: 0;
+  line-height: 1.3;
+}
+
+[data-theme="dark"] .disclaimer-title,
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) .disclaimer-title {
+    color: #fbbf24;
+  }
+}
+
+.disclaimer-body {
+  font-size: 0.9rem;
+  line-height: 1.65;
+  color: #78350f;
+}
+
+[data-theme="dark"] .disclaimer-body,
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) .disclaimer-body {
+    color: #fde68a;
+  }
+}
+
+.disclaimer-body p {
+  margin-bottom: 0.65rem;
+}
+
+.disclaimer-body p:last-child {
+  margin-bottom: 0;
+}
+
+.disclaimer-body strong {
+  color: #451a03;
+  font-weight: 700;
+}
+
+[data-theme="dark"] .disclaimer-body strong,
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) .disclaimer-body strong {
+    color: #ffffff;
+  }
+}
+
+.disclaimer-body a {
+  color: #b45309;
+  font-weight: 700;
+  text-decoration: underline;
+}
+
+.disclaimer-body a:hover {
+  color: #92400e;
+}
+
+[data-theme="dark"] .disclaimer-body a,
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) .disclaimer-body a {
+    color: #60a5fa;
+  }
+  :root:not([data-theme="light"]) .disclaimer-body a:hover {
+    color: #93c5fd;
+  }
 }
 
 /* Info Card / Methodology */
@@ -1168,6 +1292,20 @@ body {
 
   .card {
     padding: 1rem 0.75rem;
+  }
+
+  .disclaimer-banner {
+    padding: 1rem 0.85rem;
+    margin-top: 1rem;
+    margin-bottom: 1.25rem;
+  }
+
+  .disclaimer-title {
+    font-size: 0.95rem;
+  }
+
+  .disclaimer-body {
+    font-size: 0.825rem;
   }
 
   .chart-tooltip {

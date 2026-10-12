@@ -3,19 +3,20 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Abwassermonitor</title>
-  <meta name="description" content="Interaktives Dashboard zur bundesweiten Abwassersurveillance (AMELAG) von RKI und UBA. Zeitreihen für SARS-CoV-2, Influenza A/B und RSV in linearer und logarithmischer Skalierung.">
-  <meta name="keywords" content="Abwassersurveillance, SARS-CoV-2, Corona, Grippe, Influenza, RSV, Viruslast, Klärwerk, Deutschland">
+  <title>Inoffizieller Abwassermonitor Deutschland | Private Open-Data-Visualisierung</title>
+  <meta name="description" content="Inoffizielle, rein private Visualisierung der öffentlich zugänglichen AMELAG-Abwasserdaten. Keine Anbindung an das Robert Koch-Institut oder Behörden.">
+  <meta name="keywords" content="Abwassersurveillance, SARS-CoV-2, Corona, Grippe, Influenza, RSV, Viruslast, Klärwerk, Deutschland, Open Data">
+  <meta name="author" content="Manuel Gómez (Inoffizielles Privatprojekt)">
   <meta name="theme-color" content="#4f46e5">
 
   <!-- Open Graph / Social Media Meta Tags -->
-  <meta property="og:title" content="AMELAG Abwassermonitor - Deutschland">
-  <meta property="og:description" content="Wöchentliche Viruslasten von SARS-CoV-2, Influenza und RSV aus 169 Kläranlagen in ganz Deutschland mit linearer und logarithmischer Visualisierung.">
+  <meta property="og:title" content="Inoffizieller Abwassermonitor - Deutschland">
+  <meta property="og:description" content="Inoffizielle, unüberprüfte Visualisierung von Viruslasten aus 169 Kläranlagen in Deutschland auf Basis öffentlicher RKI/UBA Open Data.">
   <meta property="og:type" content="website">
   <meta property="og:url" content="https://mgomezch.github.io/amelag-dashboard/">
   <meta property="og:image" content="assets/national_chart_linear.svg">
 
-  <link rel="stylesheet" href="css/dashboard.css?v=1791803576">
+  <link rel="stylesheet" href="css/dashboard.css?v=1791807877">
   
   <noscript>
     <style>
@@ -32,10 +33,10 @@
   <header class="app-header" role="banner">
     <div class="container header-container">
       <div class="brand">
-        <div class="brand-badge">Dashboard</div>
+        <div class="brand-badge brand-badge-unofficial" data-i18n="brand_badge">Inoffiziell</div>
         <div>
-          <h1 class="brand-title" data-i18n="brand_title">Abwassersurveillance Deutschland</h1>
-          <p class="brand-subtitle"><span data-i18n="brand_sub">Quelle: Robert Koch-Institut &amp; Umweltbundesamt • Datenstand:</span> <time id="header-data-date" datetime="2026-09-30">30. Sept. 2026</time></p>
+          <h1 class="brand-title" data-i18n="brand_title">Abwassermonitor Deutschland</h1>
+          <p class="brand-subtitle"><span data-i18n="brand_sub">Inoffizielles Dashboard • Datenquelle: RKI &amp; UBA Open Data • Stand:</span> <time id="header-data-date" datetime="2026-09-30">30. Sept. 2026</time></p>
         </div>
       </div>
       <div class="header-actions">
@@ -47,9 +48,9 @@
         <button id="theme-toggle" class="btn btn-icon js-only" aria-label="Farbschema wechseln" title="Farbschema wechseln">
           <span class="icon-sun">☀️</span><span class="icon-moon">🌙</span>
         </button>
-        <a href="https://github.com/robert-koch-institut/Abwassersurveillance_AMELAG" target="_blank" rel="noopener noreferrer" class="btn btn-outline" title="RKI Datensatz">
+        <a href="https://github.com/robert-koch-institut/Abwassersurveillance_AMELAG" target="_blank" rel="noopener noreferrer" class="btn btn-outline" title="RKI Originaldaten (GitHub)">
           <svg class="icon-github" viewBox="0 0 16 16" width="16" height="16" fill="currentColor" aria-hidden="true"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"/></svg>
-          <span data-i18n="rki_dataset">RKI Datensatz</span>
+          <span data-i18n="rki_dataset">RKI Originaldaten (GitHub)</span>
         </a>
       </div>
     </div>
@@ -58,6 +59,19 @@
   <!-- Main Container -->
   <main id="main-content" class="container" role="main">
     
+    <!-- Unofficial Project Disclaimer Banner -->
+    <aside class="disclaimer-banner" role="alert" aria-label="Wichtiger Hinweis und Haftungsausschluss">
+      <div class="disclaimer-header">
+        <span class="disclaimer-badge" data-i18n="disclaimer_badge">⚠️ WICHTIGER HINWEIS &amp; HAFTUNGSAUSSCHLUSS</span>
+        <h2 class="disclaimer-title" data-i18n="disclaimer_title">Inoffizielles, unüberprüftes Freizeitprojekt – Keine Anbindung an Behörden oder Institute</h2>
+      </div>
+      <div class="disclaimer-body">
+        <p data-i18n="disclaimer_p1"><strong>Dieses Dashboard ist ein rein privates, unüberprüftes Freizeitprojekt von Manuel Gómez und steht in KEINERLEI Verbindung oder Partnerschaft zum Robert Koch-Institut (RKI), dem Umweltbundesamt (UBA) oder sonstigen Behörden oder Institutionen.</strong></p>
+        <p data-i18n="disclaimer_p2">Der Betreiber übernimmt keinerlei Gewähr für die Richtigkeit, Aktualität, Vollständigkeit oder Verlässlichkeit der hier dargestellten Grafiken, Berechnungen und Daten. <strong>Niemand sollte sich auf die Inhalte dieser Seite stützen</strong> (weder für medizinische, gesundheitliche, behördliche, rechtliche noch sonstige Entscheidungen).</p>
+        <p data-i18n="disclaimer_p3">Für verlässliche epidemiologische Informationen, offizielle Bewertungen und validierte Auswertungen <strong>konsultieren Sie bitte ausschließlich die Primärquellen der zuständigen Fachbehörden</strong>: das offizielle <a href="https://github.com/robert-koch-institut/Abwassersurveillance_AMELAG" target="_blank" rel="noopener noreferrer">RKI AMELAG GitHub-Repository</a> und das <a href="https://www.rki.de/abwassersurveillance" target="_blank" rel="noopener noreferrer">Webangebot der RKI-Abwassersurveillance</a>. <strong>Vertrauen Sie diesem inoffiziellen Dashboard nicht.</strong></p>
+      </div>
+    </aside>
+
     <!-- KPI Hero Summary Cards -->
     <section class="kpi-grid" aria-label="Wichtigste Kennzahlen / Key Metrics">
       <div class="kpi-card" id="kpi-sars">
@@ -240,7 +254,7 @@
       <div id="chart-viewport" class="chart-viewport js-only">
         <div id="chart-svg-container" class="chart-svg-container">
           <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 980 480" class="amelag-chart-svg" role="img" aria-label="Bundesweite Viruslast im Abwasser (Lineare Skala (Genkopien / Liter))">
-  <title>Abwassersurveillance Deutschland - Lineare Skala (Genkopien / Liter)</title>
+  <title>Abwassermonitor Deutschland - Lineare Skala (Genkopien / Liter)</title>
   <desc>Zeitreihe der SARS-CoV-2, Influenza und RSV Viruslast im Abwasser (Deutschland, 2022-03-02 bis 2026-09-30).</desc>
   <defs>
     <linearGradient id="ciGrad" x1="0%" y1="0%" x2="0%" y2="100%">
@@ -295,7 +309,7 @@
     <path d="M 80.0,302.2 L 83.6,256.5 L 87.2,209.1 L 90.8,177.4 L 94.4,172.1 L 98.0,190.0 L 101.6,222.5 L 105.2,261.1 L 108.8,298.9 L 112.4,330.0 L 116.0,351.7 L 119.6,364.2 L 123.2,367.3 L 126.8,358.0 L 130.4,331.2 L 134.0,288.6 L 137.6,247.7 L 141.2,220.8 L 144.8,203.1 L 148.4,192.5 L 152.0,205.7 L 155.6,251.5 L 159.2,302.3 L 162.8,334.6 L 166.4,348.4 L 170.0,355.1 L 173.6,362.1 L 177.2,368.2 L 180.8,366.4 L 184.4,349.3 L 187.9,314.5 L 191.5,273.7 L 195.1,252.2 L 198.7,260.5 L 202.3,291.6 L 205.9,323.2 L 209.5,341.5 L 213.1,344.7 L 216.7,335.7 L 220.3,313.3 L 223.9,280.7 L 227.5,255.9 L 231.1,262.8 L 234.7,296.5 L 238.3,337.3 L 241.9,365.8 L 245.5,375.3 L 249.1,363.8 L 252.7,329.9 L 256.3,284.8 L 259.9,257.7 L 263.5,250.3 L 267.1,249.7 L 270.7,257.8 L 274.3,282.8 L 277.9,318.1 L 281.5,344.3 L 285.1,355.2 L 288.7,356.7 L 292.3,357.6 L 295.9,364.0 L 299.5,373.4 L 303.1,382.2 L 306.7,389.2 L 310.3,394.6 L 313.9,398.7 L 317.5,402.0 L 321.1,405.0 L 324.7,407.5 L 328.3,408.7 L 331.9,408.1 L 335.5,406.0 L 339.1,403.5 L 342.7,402.0 L 346.3,400.5 L 349.9,397.5 L 353.5,392.3 L 357.1,384.9 L 360.7,376.0 L 364.3,366.7 L 367.9,358.5 L 371.5,352.0 L 375.1,345.0 L 378.7,335.1 L 382.3,322.1 L 385.9,308.3 L 389.5,295.9 L 393.1,285.4 L 396.7,276.3 L 400.3,264.9 L 403.8,243.7 L 407.4,207.5 L 411.0,170.6 L 414.6,162.0 L 418.2,193.5 L 421.8,248.1 L 425.4,302.7 L 429.0,338.6 L 432.6,353.6 L 436.2,356.3 L 439.8,360.5 L 443.4,374.5 L 447.0,389.4 L 450.6,398.7 L 454.2,403.0 L 457.8,404.9 L 461.4,405.9 L 465.0,406.6 L 468.6,407.6 L 472.2,409.0 L 475.8,409.7 L 479.4,408.7 L 483.0,406.0 L 486.6,402.8 L 490.2,401.3 L 493.8,401.3 L 497.4,401.4 L 501.0,400.2 L 504.6,397.1 L 508.2,391.0 L 511.8,381.4 L 515.4,370.3 L 519.0,361.1 L 522.6,355.7 L 526.2,354.4 L 529.8,355.3 L 533.4,355.1 L 537.0,351.9 L 540.6,348.0 L 544.2,347.2 L 547.8,349.8 L 551.4,352.3 L 555.0,351.8 L 558.6,347.4 L 562.2,338.0 L 565.8,324.1 L 569.4,310.8 L 573.0,306.0 L 576.6,310.6 L 580.2,320.2 L 583.8,330.9 L 587.4,340.5 L 591.0,347.6 L 594.6,351.5 L 598.2,351.8 L 601.8,349.0 L 605.4,349.4 L 609.0,359.4 L 612.6,374.7 L 616.2,386.1 L 619.7,391.6 L 623.3,393.9 L 626.9,395.3 L 630.5,397.1 L 634.1,399.2 L 637.7,401.5 L 641.3,403.5 L 644.9,405.0 L 648.5,405.8 L 652.1,406.0 L 655.7,405.9 L 659.3,405.6 L 662.9,406.0 L 666.5,407.3 L 670.1,408.4 L 673.7,408.4 L 677.3,407.1 L 680.9,405.0 L 684.5,403.0 L 688.1,401.3 L 691.7,400.3 L 695.3,399.9 L 698.9,400.1 L 702.5,401.0 L 706.1,401.8 L 709.7,401.6 L 713.3,399.9 L 716.9,396.8 L 720.5,392.7 L 724.1,387.6 L 727.7,381.9 L 731.3,375.8 L 734.9,370.1 L 738.5,366.2 L 742.1,363.5 L 745.7,358.9 L 749.3,349.2 L 752.9,337.7 L 756.5,333.6 L 760.1,341.8 L 763.7,353.9 L 767.3,362.9 L 770.9,366.5 L 774.5,363.3 L 778.1,351.5 L 781.7,333.8 L 785.3,318.6 L 788.9,316.0 L 792.5,330.5 L 796.1,356.3 L 799.7,378.8 L 803.3,392.5 L 806.9,399.7 L 810.5,403.4 L 814.1,405.1 L 817.7,406.3 L 821.3,408.6 L 824.9,411.7 L 828.5,414.4 L 832.1,416.2 L 835.6,417.4 L 839.2,418.1 L 842.8,418.5 L 846.4,418.7 L 850.0,418.9 L 853.6,419.0 L 857.2,419.1 L 860.8,419.1 L 864.4,419.2 L 868.0,419.2 L 871.6,419.2 L 875.2,419.2 L 878.8,419.2 L 882.4,419.2 L 886.0,419.1 L 889.6,419.0 L 893.2,418.9 L 896.8,418.8 L 900.4,418.6 L 904.0,418.4 L 907.6,418.1 L 911.2,417.6 L 914.8,417.1 L 918.4,416.3 L 922.0,415.2 L 925.6,413.7 L 929.2,411.7 L 932.8,408.9 L 936.4,405.3 L 940.0,400.4" fill="none" stroke="#4f46e5" stroke-width="3" />
   </g>
   <text x="80" y="28" font-size="14" font-weight="700" fill="var(--text-color, #0f172a)" font-family="system-ui, sans-serif">Bundesweite Viruslast im Abwasser (Lineare Skala (Genkopien / Liter))</text>
-  <text x="80" y="44" font-size="11" fill="var(--text-muted, #64748b)" font-family="system-ui, sans-serif">GAM-Modellierte Trends &amp; 95%-Konfidenzintervall • Quelle: RKI/UBA AMELAG</text>
+  <text x="80" y="44" font-size="11" fill="var(--text-muted, #64748b)" font-family="system-ui, sans-serif">GAM-Modellierte Trends &amp; 95%-Konfidenzintervall • Datenquelle: RKI/UBA AMELAG Open Data</text>
   <g transform="translate(520, 36)" font-family="system-ui, sans-serif" font-size="11">
     <line x1="0" y1="0" x2="16" y2="0" stroke="#4f46e5" stroke-width="3" />
     <text x="22" y="3" fill="var(--text-color, #1e293b)" font-weight="600">SARS-CoV-2</text>
@@ -324,7 +338,7 @@
             <summary class="chart-summary"><strong>📊 Lineare Skala (Genkopien / Liter)</strong></summary>
             <div class="static-svg-wrapper">
               <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 980 480" class="amelag-chart-svg" role="img" aria-label="Bundesweite Viruslast im Abwasser (Lineare Skala (Genkopien / Liter))">
-  <title>Abwassersurveillance Deutschland - Lineare Skala (Genkopien / Liter)</title>
+  <title>Abwassermonitor Deutschland - Lineare Skala (Genkopien / Liter)</title>
   <desc>Zeitreihe der SARS-CoV-2, Influenza und RSV Viruslast im Abwasser (Deutschland, 2022-03-02 bis 2026-09-30).</desc>
   <defs>
     <linearGradient id="ciGrad" x1="0%" y1="0%" x2="0%" y2="100%">
@@ -379,7 +393,7 @@
     <path d="M 80.0,302.2 L 83.6,256.5 L 87.2,209.1 L 90.8,177.4 L 94.4,172.1 L 98.0,190.0 L 101.6,222.5 L 105.2,261.1 L 108.8,298.9 L 112.4,330.0 L 116.0,351.7 L 119.6,364.2 L 123.2,367.3 L 126.8,358.0 L 130.4,331.2 L 134.0,288.6 L 137.6,247.7 L 141.2,220.8 L 144.8,203.1 L 148.4,192.5 L 152.0,205.7 L 155.6,251.5 L 159.2,302.3 L 162.8,334.6 L 166.4,348.4 L 170.0,355.1 L 173.6,362.1 L 177.2,368.2 L 180.8,366.4 L 184.4,349.3 L 187.9,314.5 L 191.5,273.7 L 195.1,252.2 L 198.7,260.5 L 202.3,291.6 L 205.9,323.2 L 209.5,341.5 L 213.1,344.7 L 216.7,335.7 L 220.3,313.3 L 223.9,280.7 L 227.5,255.9 L 231.1,262.8 L 234.7,296.5 L 238.3,337.3 L 241.9,365.8 L 245.5,375.3 L 249.1,363.8 L 252.7,329.9 L 256.3,284.8 L 259.9,257.7 L 263.5,250.3 L 267.1,249.7 L 270.7,257.8 L 274.3,282.8 L 277.9,318.1 L 281.5,344.3 L 285.1,355.2 L 288.7,356.7 L 292.3,357.6 L 295.9,364.0 L 299.5,373.4 L 303.1,382.2 L 306.7,389.2 L 310.3,394.6 L 313.9,398.7 L 317.5,402.0 L 321.1,405.0 L 324.7,407.5 L 328.3,408.7 L 331.9,408.1 L 335.5,406.0 L 339.1,403.5 L 342.7,402.0 L 346.3,400.5 L 349.9,397.5 L 353.5,392.3 L 357.1,384.9 L 360.7,376.0 L 364.3,366.7 L 367.9,358.5 L 371.5,352.0 L 375.1,345.0 L 378.7,335.1 L 382.3,322.1 L 385.9,308.3 L 389.5,295.9 L 393.1,285.4 L 396.7,276.3 L 400.3,264.9 L 403.8,243.7 L 407.4,207.5 L 411.0,170.6 L 414.6,162.0 L 418.2,193.5 L 421.8,248.1 L 425.4,302.7 L 429.0,338.6 L 432.6,353.6 L 436.2,356.3 L 439.8,360.5 L 443.4,374.5 L 447.0,389.4 L 450.6,398.7 L 454.2,403.0 L 457.8,404.9 L 461.4,405.9 L 465.0,406.6 L 468.6,407.6 L 472.2,409.0 L 475.8,409.7 L 479.4,408.7 L 483.0,406.0 L 486.6,402.8 L 490.2,401.3 L 493.8,401.3 L 497.4,401.4 L 501.0,400.2 L 504.6,397.1 L 508.2,391.0 L 511.8,381.4 L 515.4,370.3 L 519.0,361.1 L 522.6,355.7 L 526.2,354.4 L 529.8,355.3 L 533.4,355.1 L 537.0,351.9 L 540.6,348.0 L 544.2,347.2 L 547.8,349.8 L 551.4,352.3 L 555.0,351.8 L 558.6,347.4 L 562.2,338.0 L 565.8,324.1 L 569.4,310.8 L 573.0,306.0 L 576.6,310.6 L 580.2,320.2 L 583.8,330.9 L 587.4,340.5 L 591.0,347.6 L 594.6,351.5 L 598.2,351.8 L 601.8,349.0 L 605.4,349.4 L 609.0,359.4 L 612.6,374.7 L 616.2,386.1 L 619.7,391.6 L 623.3,393.9 L 626.9,395.3 L 630.5,397.1 L 634.1,399.2 L 637.7,401.5 L 641.3,403.5 L 644.9,405.0 L 648.5,405.8 L 652.1,406.0 L 655.7,405.9 L 659.3,405.6 L 662.9,406.0 L 666.5,407.3 L 670.1,408.4 L 673.7,408.4 L 677.3,407.1 L 680.9,405.0 L 684.5,403.0 L 688.1,401.3 L 691.7,400.3 L 695.3,399.9 L 698.9,400.1 L 702.5,401.0 L 706.1,401.8 L 709.7,401.6 L 713.3,399.9 L 716.9,396.8 L 720.5,392.7 L 724.1,387.6 L 727.7,381.9 L 731.3,375.8 L 734.9,370.1 L 738.5,366.2 L 742.1,363.5 L 745.7,358.9 L 749.3,349.2 L 752.9,337.7 L 756.5,333.6 L 760.1,341.8 L 763.7,353.9 L 767.3,362.9 L 770.9,366.5 L 774.5,363.3 L 778.1,351.5 L 781.7,333.8 L 785.3,318.6 L 788.9,316.0 L 792.5,330.5 L 796.1,356.3 L 799.7,378.8 L 803.3,392.5 L 806.9,399.7 L 810.5,403.4 L 814.1,405.1 L 817.7,406.3 L 821.3,408.6 L 824.9,411.7 L 828.5,414.4 L 832.1,416.2 L 835.6,417.4 L 839.2,418.1 L 842.8,418.5 L 846.4,418.7 L 850.0,418.9 L 853.6,419.0 L 857.2,419.1 L 860.8,419.1 L 864.4,419.2 L 868.0,419.2 L 871.6,419.2 L 875.2,419.2 L 878.8,419.2 L 882.4,419.2 L 886.0,419.1 L 889.6,419.0 L 893.2,418.9 L 896.8,418.8 L 900.4,418.6 L 904.0,418.4 L 907.6,418.1 L 911.2,417.6 L 914.8,417.1 L 918.4,416.3 L 922.0,415.2 L 925.6,413.7 L 929.2,411.7 L 932.8,408.9 L 936.4,405.3 L 940.0,400.4" fill="none" stroke="#4f46e5" stroke-width="3" />
   </g>
   <text x="80" y="28" font-size="14" font-weight="700" fill="var(--text-color, #0f172a)" font-family="system-ui, sans-serif">Bundesweite Viruslast im Abwasser (Lineare Skala (Genkopien / Liter))</text>
-  <text x="80" y="44" font-size="11" fill="var(--text-muted, #64748b)" font-family="system-ui, sans-serif">GAM-Modellierte Trends &amp; 95%-Konfidenzintervall • Quelle: RKI/UBA AMELAG</text>
+  <text x="80" y="44" font-size="11" fill="var(--text-muted, #64748b)" font-family="system-ui, sans-serif">GAM-Modellierte Trends &amp; 95%-Konfidenzintervall • Datenquelle: RKI/UBA AMELAG Open Data</text>
   <g transform="translate(520, 36)" font-family="system-ui, sans-serif" font-size="11">
     <line x1="0" y1="0" x2="16" y2="0" stroke="#4f46e5" stroke-width="3" />
     <text x="22" y="3" fill="var(--text-color, #1e293b)" font-weight="600">SARS-CoV-2</text>
@@ -400,7 +414,7 @@
             <summary class="chart-summary"><strong>📈 Logarithmische Skala (Log₁₀)</strong></summary>
             <div class="static-svg-wrapper">
               <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 980 480" class="amelag-chart-svg" role="img" aria-label="Bundesweite Viruslast im Abwasser (Logarithmische Skala (Log₁₀))">
-  <title>Abwassersurveillance Deutschland - Logarithmische Skala (Log₁₀)</title>
+  <title>Abwassermonitor Deutschland - Logarithmische Skala (Log₁₀)</title>
   <desc>Zeitreihe der SARS-CoV-2, Influenza und RSV Viruslast im Abwasser (Deutschland, 2022-03-02 bis 2026-09-30).</desc>
   <defs>
     <linearGradient id="ciGrad" x1="0%" y1="0%" x2="0%" y2="100%">
@@ -455,7 +469,7 @@
     <path d="M 80.0,172.3 L 83.6,161.7 L 87.2,153.5 L 90.8,149.0 L 94.4,148.3 L 98.0,150.7 L 101.6,155.6 L 105.2,162.6 L 108.8,171.4 L 112.4,180.9 L 116.0,189.8 L 119.6,196.3 L 123.2,198.1 L 126.8,192.9 L 130.4,181.3 L 134.0,168.7 L 137.6,160.0 L 141.2,155.4 L 144.8,152.6 L 148.4,151.1 L 152.0,153.0 L 155.6,160.7 L 159.2,172.3 L 162.8,182.6 L 166.4,188.3 L 170.0,191.4 L 173.6,195.1 L 177.2,198.6 L 180.8,197.6 L 184.4,188.6 L 187.9,175.8 L 191.5,165.3 L 195.1,160.9 L 198.7,162.5 L 202.3,169.5 L 205.9,178.6 L 209.5,185.3 L 213.1,186.6 L 216.7,183.0 L 220.3,175.4 L 223.9,166.9 L 227.5,161.6 L 231.1,163.0 L 234.7,170.7 L 238.3,183.6 L 241.9,197.2 L 245.5,203.4 L 249.1,196.0 L 252.7,180.9 L 256.3,167.8 L 259.9,161.9 L 263.5,160.5 L 267.1,160.4 L 270.7,162.0 L 274.3,167.3 L 277.9,176.9 L 281.5,186.4 L 285.1,191.5 L 288.7,192.2 L 292.3,192.7 L 295.9,196.2 L 299.5,202.0 L 303.1,208.7 L 306.7,215.4 L 310.3,221.6 L 313.9,227.2 L 317.5,232.5 L 321.1,238.4 L 324.7,244.3 L 328.3,247.5 L 331.9,245.8 L 335.5,240.6 L 339.1,235.5 L 342.7,232.6 L 346.3,230.0 L 349.9,225.5 L 353.5,218.8 L 357.1,211.2 L 360.7,203.9 L 364.3,197.8 L 367.9,193.2 L 371.5,189.9 L 375.1,186.8 L 378.7,182.8 L 382.3,178.2 L 385.9,173.9 L 389.5,170.6 L 393.1,167.9 L 396.7,165.9 L 400.3,163.4 L 403.8,159.3 L 407.4,153.3 L 411.0,148.1 L 414.6,147.1 L 418.2,151.2 L 421.8,160.1 L 425.4,172.4 L 429.0,184.1 L 432.6,190.7 L 436.2,192.0 L 439.8,194.2 L 443.4,202.8 L 447.0,215.6 L 450.6,227.2 L 454.2,234.4 L 457.8,238.3 L 461.4,240.4 L 465.0,242.1 L 468.6,244.7 L 472.2,248.5 L 475.8,250.5 L 479.4,247.7 L 483.0,240.7 L 486.6,234.0 L 490.2,231.4 L 493.8,231.5 L 497.4,231.5 L 501.0,229.6 L 504.6,224.9 L 508.2,217.2 L 511.8,208.1 L 515.4,200.0 L 519.0,194.5 L 522.6,191.7 L 526.2,191.1 L 529.8,191.5 L 533.4,191.4 L 537.0,189.8 L 540.6,188.1 L 544.2,187.7 L 547.8,188.9 L 551.4,190.0 L 555.0,189.8 L 558.6,187.8 L 562.2,183.9 L 565.8,178.8 L 569.4,174.7 L 573.0,173.3 L 576.6,174.6 L 580.2,177.6 L 583.8,181.2 L 587.4,184.9 L 591.0,187.9 L 594.6,189.7 L 598.2,189.8 L 601.8,188.5 L 605.4,188.7 L 609.0,193.6 L 612.6,202.9 L 616.2,212.3 L 619.7,218.0 L 623.3,220.7 L 626.9,222.5 L 630.5,224.9 L 634.1,228.0 L 637.7,231.7 L 641.3,235.5 L 644.9,238.5 L 648.5,240.2 L 652.1,240.8 L 655.7,240.4 L 659.3,239.9 L 662.9,240.8 L 666.5,243.9 L 670.1,246.8 L 673.7,246.9 L 677.3,243.4 L 680.9,238.6 L 684.5,234.4 L 688.1,231.4 L 691.7,229.7 L 695.3,229.0 L 698.9,229.5 L 702.5,230.9 L 706.1,232.2 L 709.7,231.9 L 713.3,229.1 L 716.9,224.5 L 720.5,219.2 L 724.1,213.8 L 727.7,208.5 L 731.3,203.7 L 734.9,199.9 L 738.5,197.4 L 742.1,195.8 L 745.7,193.4 L 749.3,188.6 L 752.9,183.8 L 756.5,182.2 L 760.1,185.4 L 763.7,190.8 L 767.3,195.5 L 770.9,197.6 L 774.5,195.7 L 778.1,189.7 L 781.7,182.3 L 785.3,177.1 L 788.9,176.2 L 792.5,181.1 L 796.1,192.0 L 799.7,206.0 L 803.3,219.1 L 806.9,228.8 L 810.5,235.2 L 814.1,238.6 L 817.7,241.5 L 821.3,247.2 L 824.9,257.3 L 828.5,270.0 L 832.1,282.8 L 835.6,294.5 L 839.2,304.3 L 842.8,311.9 L 846.4,317.6 L 850.0,322.0 L 853.6,325.5 L 857.2,328.2 L 860.8,330.4 L 864.4,332.1 L 868.0,333.2 L 871.6,333.8 L 875.2,333.8 L 878.8,333.1 L 882.4,331.6 L 886.0,329.5 L 889.6,326.7 L 893.2,323.3 L 896.8,319.4 L 900.4,314.9 L 904.0,309.8 L 907.6,304.2 L 911.2,297.8 L 914.8,290.8 L 918.4,283.1 L 922.0,274.9 L 925.6,266.3 L 929.2,257.3 L 932.8,248.2 L 936.4,239.1 L 940.0,229.8" fill="none" stroke="#4f46e5" stroke-width="3" />
   </g>
   <text x="80" y="28" font-size="14" font-weight="700" fill="var(--text-color, #0f172a)" font-family="system-ui, sans-serif">Bundesweite Viruslast im Abwasser (Logarithmische Skala (Log₁₀))</text>
-  <text x="80" y="44" font-size="11" fill="var(--text-muted, #64748b)" font-family="system-ui, sans-serif">GAM-Modellierte Trends &amp; 95%-Konfidenzintervall • Quelle: RKI/UBA AMELAG</text>
+  <text x="80" y="44" font-size="11" fill="var(--text-muted, #64748b)" font-family="system-ui, sans-serif">GAM-Modellierte Trends &amp; 95%-Konfidenzintervall • Datenquelle: RKI/UBA AMELAG Open Data</text>
   <g transform="translate(520, 36)" font-family="system-ui, sans-serif" font-size="11">
     <line x1="0" y1="0" x2="16" y2="0" stroke="#4f46e5" stroke-width="3" />
     <text x="22" y="3" fill="var(--text-color, #1e293b)" font-weight="600">SARS-CoV-2</text>
@@ -721,10 +735,10 @@
     </div>
 
     <!-- Methodology & Data Notes -->
-    <section class="card info-card" aria-label="Über den AMELAG-Datensatz &amp; Methodik">
-      <h2 class="card-title" data-i18n="method_heading">Über den AMELAG-Datensatz &amp; Methodik</h2>
+    <section class="card info-card" aria-label="Über die Datenquelle &amp; Inoffizielles Projekt">
+      <h2 class="card-title" data-i18n="method_heading">Über die Datenquelle &amp; Inoffizielles Projekt</h2>
       <div class="info-content">
-        <p data-i18n="method_intro">Das Projekt <strong>AMELAG</strong> (<em>Abwassersurveillance zur epidemiologischen Lageerfassung</em>) ist eine gemeinsame Initiative des <strong>Robert Koch-Instituts (RKI)</strong> und des <strong>Umweltbundesamts (UBA)</strong>. Seit Februar 2022 wird in einem bundesweiten Verbund aus Kläranlagen, Laboren und Fachbehörden die Konzentration von Krankheitserregern im Rohabwasser fortlaufend überwacht.</p>
+        <p data-i18n="method_intro">Die hier visualisierten Messdaten stammen aus dem Open-Data-Projekt <strong>AMELAG</strong> (<em>Abwassersurveillance zur epidemiologischen Lageerfassung</em>), einer gemeinsamen Initiative des <strong>Robert Koch-Instituts (RKI)</strong> und des <strong>Umweltbundesamts (UBA)</strong>. <strong>Wichtig:</strong> Diese Website ist ein rein privates, unüberprüftes Freizeitprojekt von Manuel Gómez und steht in <em>keinerlei</em> geschäftlicher, organisatorischer oder offizieller Beziehung zum Robert Koch-Institut oder dem Umweltbundesamt. Die Darstellung der Daten erfolgt ohne Gewähr und stellt keine offizielle Information dar.</p>
         
         <h3 data-i18n="why_scales_heading">Warum lineare und logarithmische Darstellung?</h3>
         <ul>
@@ -736,7 +750,7 @@
         <p data-i18n="norm_gam_p">Um Schwankungen durch Niederschläge, Schmelzwasser oder gewerbliche Einleitungen auszugleichen, wird die gemessene Viruslast über den Abwasserdurchfluss der Kläranlage normalisiert. Anschließend wird eine GAM-Regression (Generalized Additive Model) mit adaptiver Spline-Glättung berechnet, um den übergeordneten epidemiologischen Trend robuster gegenüber einzelnen Messtoleranzen abzubilden.</p>
         
         <div class="license-box">
-          <p data-i18n="license_text"><strong>Datenlizenz:</strong> Die Rohdaten stehen unter der Lizenz <a href="https://creativecommons.org/licenses/by/4.0/deed.de" target="_blank" rel="noopener noreferrer">Creative Commons Namensnennung 4.0 International (CC BY 4.0)</a> bzw. Datenlizenz Deutschland – Namensnennung – Version 2.0. Quelle: Robert Koch-Institut (RKI) &amp; Umweltbundesamt (UBA), Zenodo Datensatz AMELAG.</p>
+          <p data-i18n="license_text"><strong>Datenquelle &amp; Lizenzierung:</strong> Die zugrundeliegenden Rohdaten stammen aus dem öffentlichen Open-Data-Repositorium des RKI/UBA und sind lizenziert unter <a href="https://creativecommons.org/licenses/by/4.0/deed.de" target="_blank" rel="noopener noreferrer">Creative Commons Namensnennung 4.0 International (CC BY 4.0)</a> bzw. dl-de/by-2-0. Dieses Web-Dashboard ist eine separate, inoffizielle Visualisierung und wird weder von den Datenurhebern herausgegeben noch geprüft.</p>
         </div>
       </div>
     </section>
@@ -746,16 +760,16 @@
   <!-- Footer -->
   <footer class="app-footer" role="contentinfo">
     <div class="container footer-container">
-      <p data-i18n="footer_text">AMELAG Abwassermonitor • Statische Webapplikation für GitHub Pages • Entwickelt mit barrierefreiem Fallback für Low-Performance &amp; Terminal-Browser.</p>
+      <p data-i18n="footer_text">Inoffizieller Abwassermonitor Deutschland • Privates, unüberprüftes Freizeitprojekt von Manuel Gómez • Keine Anbindung an das Robert Koch-Institut, Umweltbundesamt oder Behörden.</p>
       <p class="footer-links">
-        <a href="https://github.com/robert-koch-institut/Abwassersurveillance_AMELAG" target="_blank" rel="noopener noreferrer" data-i18n="footer_orig">Original RKI Repository</a> •
-        <a href="https://www.rki.de/DE/Content/InfAZ/A/Abwassersurveillance/abwassersurveillance_node.html" target="_blank" rel="noopener noreferrer" data-i18n="footer_info">RKI Fachinformation</a> •
-        <a href="https://www.umweltbundesamt.de/" target="_blank" rel="noopener noreferrer" data-i18n="footer_uba">Umweltbundesamt</a>
+        <a href="https://github.com/robert-koch-institut/Abwassersurveillance_AMELAG" target="_blank" rel="noopener noreferrer" data-i18n="footer_orig">Original RKI Daten-Repository (GitHub)</a> •
+        <a href="https://www.rki.de/DE/Content/InfAZ/A/Abwassersurveillance/abwassersurveillance_node.html" target="_blank" rel="noopener noreferrer" data-i18n="footer_info">Offizielle RKI Fachseite</a> •
+        <a href="https://www.umweltbundesamt.de/" target="_blank" rel="noopener noreferrer" data-i18n="footer_uba">Umweltbundesamt (UBA)</a>
       </p>
     </div>
   </footer>
 
   <!-- SPA Hydration Script -->
-  <script src="js/dashboard.js?v=1791803576"></script>
+  <script src="js/dashboard.js?v=1791807877"></script>
 </body>
 </html>
