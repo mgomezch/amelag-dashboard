@@ -248,6 +248,7 @@
       siteCache: {}
     }
   };
+  window.AppState = AppState;
 
   // DOM Elements
   const DOM = {
@@ -255,6 +256,7 @@
     btnScaleLinear: document.getElementById('btn-scale-linear'),
     btnScaleLog: document.getElementById('btn-scale-log'),
     filterTimePreset: document.getElementById('filter-time-preset'),
+    sliderWrapper: document.querySelector('.dual-slider-wrapper'),
     sliderStart: document.getElementById('slider-start'),
     sliderEnd: document.getElementById('slider-end'),
     sliderHighlight: document.getElementById('slider-highlight'),
@@ -1052,11 +1054,9 @@
       svgParts.push(`    <text x="${isMobile ? 138 : 188}" y="3" fill="var(--text-muted)">${t.ciBand}</text>`);
     }
     svgParts.push(`  </g>`);
-
     svgParts.push(`</svg>`);
 
-    DOM.chartContainer.innerHTML = svgParts.join('
-');
+    DOM.chartContainer.innerHTML = svgParts.join('\n');
     attachChartInteractivity(datasetsToPlot, getX, getY, margin, plotW, plotH);
   }
 
@@ -1206,8 +1206,7 @@
       return;
     }
 
-    const csvContent = 'data:text/csv;charset=utf-8,' + rows.map(e => e.join(';')).join('
-');
+    const csvContent = 'data:text/csv;charset=utf-8,' + rows.map(e => e.join(';')).join('\n');
     const encodedUri = encodeURI(csvContent);
     const link = document.createElement('a');
     link.setAttribute('href', encodedUri);
@@ -1255,20 +1254,26 @@
     });
 
     // Scale Buttons
-    DOM.btnScaleLinear?.addEventListener('click', () => {
-      AppState.scale = 'linear';
-      DOM.btnScaleLinear.classList.add('active');
-      DOM.btnScaleLog.classList.remove('active');
+    // Scale Buttons (Touch-friendly & instantaneous)
+    function setScale(scale) {
+      if (AppState.scale === scale) return;
+      AppState.scale = scale;
+      if (DOM.btnScaleLinear && DOM.btnScaleLog) {
+        DOM.btnScaleLinear.classList.toggle('active', scale === 'linear');
+        DOM.btnScaleLog.classList.toggle('active', scale === 'log');
+      }
       renderChart();
       syncStateToURL();
+    }
+
+    DOM.btnScaleLinear?.addEventListener('click', e => {
+      e.preventDefault();
+      setScale('linear');
     });
 
-    DOM.btnScaleLog?.addEventListener('click', () => {
-      AppState.scale = 'log';
-      DOM.btnScaleLog.classList.add('active');
-      DOM.btnScaleLinear.classList.remove('active');
-      renderChart();
-      syncStateToURL();
+    DOM.btnScaleLog?.addEventListener('click', e => {
+      e.preventDefault();
+      setScale('log');
     });
 
     // Time Preset Dropdown
@@ -1276,34 +1281,122 @@
       applyTimePreset(e.target.value, true);
     });
 
-    // Dual Range Slider Inputs
-    DOM.sliderStart?.addEventListener('input', e => {
-      let val = Number(e.target.value);
-      const endVal = Number(DOM.sliderEnd?.value || AppState.totalDays);
-      if (val >= endVal) {
-        val = Math.max(0, endVal - 1);
-        e.target.value = val;
-      }
-      AppState.startDate = daysToDateStr(val);
-      AppState.timePreset = 'custom';
-      updateSlicerUI();
-      renderChart();
-      syncStateToURL();
-    });
+    // Dual Range Slider: Touch & Pointer Event Dragging
+    const sliderWrapper = DOM.sliderWrapper || document.querySelector('.dual-slider-wrapper');
+    if (sliderWrapper && DOM.sliderStart && DOM.sliderEnd) {
+      let activeHandle = null;
 
-    DOM.sliderEnd?.addEventListener('input', e => {
-      let val = Number(e.target.value);
-      const startVal = Number(DOM.sliderStart?.value || 0);
-      if (val <= startVal) {
-        val = Math.min(AppState.totalDays, startVal + 1);
-        e.target.value = val;
+      function getFraction(e) {
+        const rect = sliderWrapper.getBoundingClientRect();
+        if (rect.width <= 0) return 0;
+        const clientX = e.clientX ?? (e.touches && e.touches[0] ? e.touches[0].clientX : 0);
+        return Math.max(0, Math.min(1, (clientX - rect.left) / rect.width));
       }
-      AppState.endDate = daysToDateStr(val);
-      AppState.timePreset = 'custom';
-      updateSlicerUI();
-      renderChart();
-      syncStateToURL();
-    });
+
+      function updateActiveThumb(frac) {
+        if (!activeHandle || AppState.totalDays <= 0) return;
+        const currentDays = Math.round(frac * AppState.totalDays);
+        let startVal = Number(DOM.sliderStart.value);
+        let endVal = Number(DOM.sliderEnd.value);
+
+        if (activeHandle === 'start') {
+          startVal = Math.max(0, Math.min(currentDays, endVal - 1));
+          DOM.sliderStart.value = startVal;
+          AppState.startDate = daysToDateStr(startVal);
+        } else if (activeHandle === 'end') {
+          endVal = Math.min(AppState.totalDays, Math.max(currentDays, startVal + 1));
+          DOM.sliderEnd.value = endVal;
+          AppState.endDate = daysToDateStr(endVal);
+        }
+
+        AppState.timePreset = 'custom';
+        updateSlicerUI();
+        renderChart();
+      }
+
+      sliderWrapper.addEventListener('pointerdown', e => {
+        if (AppState.totalDays <= 0) return;
+        const frac = getFraction(e);
+        const currentDays = Math.round(frac * AppState.totalDays);
+        const startVal = Number(DOM.sliderStart.value);
+        const endVal = Number(DOM.sliderEnd.value);
+
+        // Pick closer handle
+        if (Math.abs(currentDays - startVal) <= Math.abs(currentDays - endVal)) {
+          activeHandle = 'start';
+          DOM.sliderStart.style.zIndex = '4';
+          DOM.sliderEnd.style.zIndex = '2';
+        } else {
+          activeHandle = 'end';
+          DOM.sliderEnd.style.zIndex = '4';
+          DOM.sliderStart.style.zIndex = '2';
+        }
+
+        try {
+          sliderWrapper.setPointerCapture(e.pointerId);
+        } catch (_) {}
+
+        updateActiveThumb(frac);
+      });
+
+      sliderWrapper.addEventListener('pointermove', e => {
+        if (activeHandle) {
+          updateActiveThumb(getFraction(e));
+        }
+      });
+
+      const handlePointerUp = e => {
+        if (activeHandle) {
+          try {
+            sliderWrapper.releasePointerCapture(e.pointerId);
+          } catch (_) {}
+          activeHandle = null;
+          syncStateToURL();
+        }
+      };
+
+      sliderWrapper.addEventListener('pointerup', handlePointerUp);
+      sliderWrapper.addEventListener('pointercancel', handlePointerUp);
+
+      // Keep native input listeners for accessibility / arrow keys
+      DOM.sliderStart.addEventListener('input', e => {
+        let val = Number(e.target.value);
+        const endVal = Number(DOM.sliderEnd.value || AppState.totalDays);
+        if (val >= endVal) {
+          val = Math.max(0, endVal - 1);
+          e.target.value = val;
+        }
+        AppState.startDate = daysToDateStr(val);
+        AppState.timePreset = 'custom';
+        updateSlicerUI();
+        renderChart();
+        syncStateToURL();
+      });
+
+      DOM.sliderEnd.addEventListener('input', e => {
+        let val = Number(e.target.value);
+        const startVal = Number(DOM.sliderStart.value || 0);
+        if (val <= startVal) {
+          val = Math.min(AppState.totalDays, startVal + 1);
+          e.target.value = val;
+        }
+        AppState.endDate = daysToDateStr(val);
+        AppState.timePreset = 'custom';
+        updateSlicerUI();
+        renderChart();
+        syncStateToURL();
+      });
+
+      DOM.sliderStart.addEventListener('focus', () => {
+        DOM.sliderStart.style.zIndex = '4';
+        DOM.sliderEnd.style.zIndex = '2';
+      });
+
+      DOM.sliderEnd.addEventListener('focus', () => {
+        DOM.sliderEnd.style.zIndex = '4';
+        DOM.sliderStart.style.zIndex = '2';
+      });
+    }
 
     DOM.filterState?.addEventListener('change', e => {
       AppState.state = e.target.value;
