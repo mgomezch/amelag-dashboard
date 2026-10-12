@@ -1,3 +1,9 @@
+# IMPORTANT NOTE
+
+This is a fully vibecoded dashboard made by me (Manuel Gómez) exclusively for personal use, purely because the official dashboard was crashing on my phone.  I have not reviewed this dashboard for correctness and it should NOT be used by anyone else for any purpose whatsoever; I cannot guarantee anything about the validity of the data here, since this was made in 30 minutes by prompting Antigravity and I have never ever reviewed a single line of code in this repository, so the data could be incorrect.  Beware!
+
+I preserved the original generated README below, but to be clear, no contents in this repository come from my own mind other than this warning.  Everything below, and everything in the rest of this repository, is generated without supervision beyond doing some superficial tests to check that the UI works.
+
 # 🦠 AMELAG Abwassermonitor Deutschland
 
 [![Deploy Static Dashboard to GitHub Pages](https://github.com/mgomezch/amelag-dashboard/actions/workflows/deploy.yml/badge.svg)](https://github.com/mgomezch/amelag-dashboard/actions)
