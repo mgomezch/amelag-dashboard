@@ -12,6 +12,7 @@ import os
 import re
 from collections import defaultdict
 from datetime import datetime
+import time
 
 BUNDESLAENDER = {
     "BW": "Baden-Württemberg",
@@ -935,8 +936,9 @@ def generate_static_html(national_data, states_data, sites_index, root_dir=".", 
     en_href = f"{path_prefix}en.html"
     active_de = "active" if lang == "de" else ""
     active_en = "active" if lang == "en" else ""
-    css_path = f"{path_prefix}css/dashboard.css"
-    js_path = f"{path_prefix}js/dashboard.js"
+    build_ver = int(time.time())
+    css_path = f"{path_prefix}css/dashboard.css?v={build_ver}"
+    js_path = f"{path_prefix}js/dashboard.js?v={build_ver}"
     assets_prefix = f"{path_prefix}assets/"
     data_prefix = f"{path_prefix}data/"
 

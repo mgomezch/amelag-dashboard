@@ -9,6 +9,25 @@
 (function () {
   'use strict';
 
+  // Derive dashboard root URL dynamically from the script tag location
+  // e.g. https://mgomezch.github.io/amelag-dashboard/js/dashboard.js?v=... -> https://mgomezch.github.io/amelag-dashboard/
+  function getBaseUrl() {
+    try {
+      const scripts = document.getElementsByTagName('script');
+      for (let i = scripts.length - 1; i >= 0; i--) {
+        const src = scripts[i].src || '';
+        if (src.includes('dashboard.js')) {
+          const idx = src.indexOf('/js/dashboard.js');
+          if (idx !== -1) {
+            return src.substring(0, idx + 1);
+          }
+        }
+      }
+    } catch (_) {}
+    return './';
+  }
+  const BASE_URL = getBaseUrl();
+
   // Constants & Dictionaries
   const PATHOGEN_CONFIG = {
     'SARS-CoV-2': { name: 'SARS-CoV-2 (COVID-19)', color: '#4f46e5', lightColor: '#818cf8', bg: 'rgba(79, 70, 229, 0.18)' },
@@ -558,9 +577,18 @@
   async function loadInitialData() {
     try {
       const [natRes, sitesRes, statesRes] = await Promise.all([
-        fetch('data/national.json').then(r => r.json()),
-        fetch('data/sites_index.json').then(r => r.json()),
-        fetch('data/states_summary.json').then(r => r.json())
+        fetch(`${BASE_URL}data/national.json`).then(r => {
+          if (!r.ok) throw new Error(`HTTP ${r.status} loading national.json`);
+          return r.json();
+        }),
+        fetch(`${BASE_URL}data/sites_index.json`).then(r => {
+          if (!r.ok) throw new Error(`HTTP ${r.status} loading sites_index.json`);
+          return r.json();
+        }),
+        fetch(`${BASE_URL}data/states_summary.json`).then(r => {
+          if (!r.ok) throw new Error(`HTTP ${r.status} loading states_summary.json`);
+          return r.json();
+        })
       ]);
 
       AppState.data.national = natRes;
@@ -573,7 +601,7 @@
       renderStatesTable();
       await updateActiveDataAndRender();
     } catch (err) {
-      console.error('Error loading initial data:', err);
+      console.error('Error loading initial data from ' + BASE_URL + ':', err);
     }
   }
 
@@ -582,11 +610,14 @@
       return AppState.data.stateCache[blCode];
     }
     try {
-      const res = await fetch(`data/states/${blCode.toLowerCase()}.json`).then(r => r.json());
+      const res = await fetch(`${BASE_URL}data/states/${blCode.toLowerCase()}.json`).then(r => {
+        if (!r.ok) throw new Error(`HTTP ${r.status} loading state ${blCode}`);
+        return r.json();
+      });
       AppState.data.stateCache[blCode] = res;
       return res;
     } catch (e) {
-      console.error(`Failed to load data for state ${blCode}`, e);
+      console.error(`Failed to load data for state ${blCode} from ${BASE_URL}:`, e);
       return null;
     }
   }
@@ -596,11 +627,14 @@
       return AppState.data.siteCache[siteSlug];
     }
     try {
-      const res = await fetch(`data/sites/${siteSlug}.json`).then(r => r.json());
+      const res = await fetch(`${BASE_URL}data/sites/${siteSlug}.json`).then(r => {
+        if (!r.ok) throw new Error(`HTTP ${r.status} loading site ${siteSlug}`);
+        return r.json();
+      });
       AppState.data.siteCache[siteSlug] = res;
       return res;
     } catch (e) {
-      console.error(`Failed to load data for site ${siteSlug}`, e);
+      console.error(`Failed to load data for site ${siteSlug} from ${BASE_URL}:`, e);
       return null;
     }
   }
@@ -1253,16 +1287,16 @@
       updateActiveDataAndRender();
     });
 
-    // Scale Buttons
     // Scale Buttons (Touch-friendly & instantaneous)
     function setScale(scale) {
-      if (AppState.scale === scale) return;
       AppState.scale = scale;
       if (DOM.btnScaleLinear && DOM.btnScaleLog) {
         DOM.btnScaleLinear.classList.toggle('active', scale === 'linear');
         DOM.btnScaleLog.classList.toggle('active', scale === 'log');
       }
-      renderChart();
+      if (AppState.data.national) {
+        renderChart();
+      }
       syncStateToURL();
     }
 
@@ -1274,6 +1308,39 @@
     DOM.btnScaleLog?.addEventListener('click', e => {
       e.preventDefault();
       setScale('log');
+    });
+
+    // Global Event Delegation for buttons and links
+    document.addEventListener('click', e => {
+      const scaleBtn = e.target.closest('[data-scale]');
+      if (scaleBtn) {
+        e.preventDefault();
+        const sc = scaleBtn.getAttribute('data-scale');
+        if (sc) setScale(sc);
+        return;
+      }
+
+      const langBtn = e.target.closest('.lang-btn');
+      if (langBtn) {
+        e.preventDefault();
+        const targetLang = langBtn.dataset.lang;
+        if (targetLang && targetLang !== AppState.lang) {
+          setLanguage(targetLang);
+          syncStateToURL();
+        }
+        return;
+      }
+
+      const stateLink = e.target.closest('.state-link');
+      if (stateLink && stateLink.dataset.bl) {
+        e.preventDefault();
+        AppState.state = stateLink.dataset.bl;
+        AppState.site = 'ALL';
+        populateSiteDropdown();
+        applyStateToInputs();
+        updateActiveDataAndRender();
+        document.getElementById('main-content')?.scrollIntoView({ behavior: 'smooth' });
+      }
     });
 
     // Time Preset Dropdown
