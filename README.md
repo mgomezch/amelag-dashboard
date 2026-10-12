@@ -36,12 +36,19 @@ aus **169 Kläranlagen** in allen **16 deutschen Bundesländern**, die über **3
 - **Metrik-Auswahl:** GAM-Spline-Regression (adaptive Glättung mit 95%-Konfidenzintervall), durchfluss-normalisierte Viruslast oder Rohmesswerte.
 - **Daten- & Grafik-Export:** 1-Klick-Export der aktuell gefilterten Daten als CSV oder als Vektorgrafik (SVG).
 
-### 3. ♿ Barrierefreiheit & Robuste No-JavaScript-Fallbacks
+### 3. 🌐 Zweisprachig (Deutsch / English)
+- **Dynamischer Sprachwechsel:** Im Header kann mit einem Klick zwischen Deutsch (**DE**) und Englisch (**EN**) gewechselt werden. Die gesamte Benutzeroberfläche, Grafiken, Legenden, Tabellen und Achsenbeschriftungen schalten ohne Neuladen der Seite sofort um.
+- **Vollwertige No-JS Multi-Page Fallbacks:**
+  - Deutsche Version: [`index.html`](index.html)
+  - Englische Version: [`en.html`](en.html) bzw. [`en/index.html`](en/index.html)
+  - Auch in Lynx und Links/Links2 kann direkt über die oberen Hyperlinks `[DE]` und `[EN]` zwischen den Sprachen gewechselt werden.
+
+### 4. ♿ Barrierefreiheit & Robuste No-JavaScript-Fallbacks
 - Funktioniert vollständig ohne JavaScript: Alle Kennzahlen, Daten der Bundesländer, Erregervergleiche und SVG-Grafiken (linear & logarithmisch) sind statisch im HTML vorgerendert.
 - Vollständig navigierbar mit Screenreadern und Tastatur (`Skip Links`, ARIA-Landmarks, semantische Tabellen).
 - Getestet in textbasierten Terminal-Browsern wie **Lynx** und **Links/Links2**.
 
-### 4. 📱 Responsives Design für alle Bildschirmgrößen
+### 5. 📱 Responsives Design für alle Bildschirmgrößen
 - Flüssiges Layout von extrem schmalen Bildschirmen (**320px** iPhone SE / KaiOS) über Smartphones (**375px**) und Tablets (**768px**) bis hin zu Desktop-Displays (**1280px+**).
 - Automatische Unterstützung für Hell- und Dunkelmodus (`prefers-color-scheme` sowie manueller Umschalter mit Speicherung in `localStorage`).
 - Optimierte Ladezeit: Initiale Ladezeit unter 50ms, da keine externen JavaScript-Frameworks oder schwere Bibliotheken verwendet werden (0 KB externe Runtime-Dependencies).

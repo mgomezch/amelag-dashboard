@@ -1,5 +1,5 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 980 480" class="amelag-chart-svg" role="img" aria-label="Bundesweite Abwassersurveillance Zeitreihe (Lineare Skala (Genkopien / Liter))">
-  <title>AMELAG Abwassersurveillance Deutschland - Lineare Skala (Genkopien / Liter)</title>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 980 480" class="amelag-chart-svg" role="img" aria-label="Bundesweite Viruslast im Abwasser (Lineare Skala (Genkopien / Liter))">
+  <title>Abwassersurveillance Deutschland - Lineare Skala (Genkopien / Liter)</title>
   <desc>Zeitreihe der SARS-CoV-2, Influenza und RSV Viruslast im Abwasser (Deutschland, 2022-03-02 bis 2026-09-30).</desc>
   <defs>
     <linearGradient id="ciGrad" x1="0%" y1="0%" x2="0%" y2="100%">

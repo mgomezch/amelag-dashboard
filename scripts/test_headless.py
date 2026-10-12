@@ -14,13 +14,15 @@ import time
 
 PORT = 8846
 RESOLUTIONS = [
-    ("mobile_narrow_320", 320, 568),
-    ("mobile_narrow_long_320", 320, 1600),
-    ("mobile_standard_375", 375, 667),
-    ("mobile_standard_long_375", 375, 1800),
-    ("tablet_768", 768, 1024),
-    ("desktop_1280", 1280, 800),
-    ("desktop_long_1280", 1280, 1600)
+    ("mobile_narrow_320", 320, 568, "index.html"),
+    ("mobile_narrow_long_320", 320, 1600, "index.html"),
+    ("mobile_standard_375", 375, 667, "index.html"),
+    ("mobile_standard_long_375", 375, 1800, "index.html"),
+    ("tablet_768", 768, 1024, "index.html"),
+    ("desktop_1280", 1280, 800, "index.html"),
+    ("desktop_long_1280", 1280, 1600, "index.html"),
+    ("en_mobile_375", 375, 667, "en.html"),
+    ("en_desktop_1280", 1280, 800, "en.html")
 ]
 
 def run_tests(root_dir="."):
@@ -39,14 +41,12 @@ def run_tests(root_dir="."):
     server_thread.start()
     time.sleep(1)
 
-    url = f"http://127.0.0.1:{PORT}/index.html"
-    print(f"Testing URL: {url}")
-
     results = []
     try:
-        for name, width, height in RESOLUTIONS:
+        for name, width, height, page in RESOLUTIONS:
+            url = f"http://127.0.0.1:{PORT}/{page}"
             screenshot_path = os.path.join(screenshots_dir, f"{name}.png")
-            print(f"Testing resolution {width}x{height} ({name})...")
+            print(f"Testing {page} at resolution {width}x{height} ({name})...")
             
             cmd = [
                 "firefox",

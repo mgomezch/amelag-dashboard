@@ -33,15 +33,242 @@ BUNDESLAENDER = {
 }
 
 PATHOGEN_NAMES = {
-    "SARS-CoV-2": "SARS-CoV-2 (COVID-19)",
-    "Influenza A": "Influenza A",
-    "Influenza B": "Influenza B",
-    "Influenza A+B": "Influenza A+B (Grippe gesamt)",
-    "RSV A": "RSV A",
-    "RSV B": "RSV B",
-    "RSV A+B": "RSV A+B (RS-Virus gesamt)",
-    "RSV A/B": "RSV A/B"
+    "de": {
+        "SARS-CoV-2": "SARS-CoV-2 (COVID-19)",
+        "Influenza A": "Influenza A",
+        "Influenza B": "Influenza B",
+        "Influenza A+B": "Influenza A+B (Grippe gesamt)",
+        "RSV A": "RSV A",
+        "RSV B": "RSV B",
+        "RSV A+B": "RSV A+B (RS-Virus gesamt)",
+        "RSV A/B": "RSV A/B",
+        "COMPARE_ALL": "⚡ Multi-Vergleich (SARS + Flu + RSV)"
+    },
+    "en": {
+        "SARS-CoV-2": "SARS-CoV-2 (COVID-19)",
+        "Influenza A": "Influenza A",
+        "Influenza B": "Influenza B",
+        "Influenza A+B": "Influenza A+B (Flu total)",
+        "RSV A": "RSV A",
+        "RSV B": "RSV B",
+        "RSV A+B": "RSV A+B (RSV total)",
+        "RSV A/B": "RSV A/B",
+        "COMPARE_ALL": "⚡ Multi-Comparison (SARS + Flu + RSV)"
+    }
 }
+
+I18N = {
+    "de": {
+        "lang": "de",
+        "doc_title": "AMELAG Abwassermonitor | Robert Koch-Institut & UBA Abwassersurveillance",
+        "doc_desc": "Interaktives Dashboard zur bundesweiten Abwassersurveillance (AMELAG) von RKI und UBA. Zeitreihen für SARS-CoV-2, Influenza A/B und RSV in linearer und logarithmischer Skalierung.",
+        "keywords": "Abwassersurveillance, AMELAG, RKI, Robert Koch-Institut, SARS-CoV-2, Corona, Grippe, Influenza, RSV, Viruslast, Klärwerk, Deutschland",
+        "og_title": "AMELAG Abwassermonitor - Deutschland",
+        "og_desc": "Wöchentliche Viruslasten von SARS-CoV-2, Influenza und RSV aus 169 Kläranlagen in ganz Deutschland mit linearer und logarithmischer Visualisierung.",
+        "brand_title": "Abwassersurveillance Deutschland",
+        "brand_sub": "Robert Koch-Institut &amp; Umweltbundesamt • Datenstand:",
+        "rki_dataset": "RKI Datensatz",
+        "theme_toggle": "Farbschema wechseln",
+        "skip_link": "Zum Hauptinhalt springen",
+        "kpi_unit": "Genkopien/L",
+        "vs_prev_week": "vs. Vorwoche",
+        "peak": "Peak:",
+        "surveillance_net": "Überwachungsnetz",
+        "nationwide": "Deutschlandweit",
+        "plants": "Kläranlagen",
+        "covered_pop": "Versorgte Bevölkerung:",
+        "active_rep": "Aktive Berichterstattung:",
+        "sites": "Standorte",
+        "filter_pathogen": "Erreger:",
+        "filter_scale": "Skalierung:",
+        "scale_linear": "Linear",
+        "scale_log": "Log₁₀",
+        "scale_linear_title": "Lineare Darstellung (absolute Virusmenge)",
+        "scale_log_title": "Logarithmische Darstellung (Exponentielles Wachstum &amp; Dynamik)",
+        "filter_time": "Zeitraum:",
+        "preset_all": "Alle Daten (Gesamt 2022–heute)",
+        "preset_30d": "Letzte 30 Tage",
+        "preset_90d": "Letzte 90 Tage (3 Monate)",
+        "preset_6m": "Letzte 6 Monate",
+        "preset_1y": "Letztes Jahr (12 Monate)",
+        "preset_2y": "Letzte 2 Jahre",
+        "preset_custom": "Benutzerdefiniert (Schieberegler)",
+        "slider_label": "Zeitfenster Schieberegler:",
+        "slider_from": "Von:",
+        "slider_to": "Bis:",
+        "filter_state": "Bundesland:",
+        "all_states": "Deutschlandweit (Gesamt)",
+        "filter_site": "Klärwerk (Standort):",
+        "all_sites": "Alle Standorte (Aggregiert)",
+        "filter_metric": "Messwert:",
+        "metric_pred": "GAM-Regression (Glättung + 95% KI)",
+        "metric_norm": "Durchfluss-normalisierte Viruslast",
+        "metric_raw": "Gemessene Viruslast (Rohwert)",
+        "export_csv": "💾 CSV Export",
+        "export_svg": "📊 SVG Export",
+        "reset_filters": "↺ Reset",
+        "chart_title_prefix": "Bundesweite Viruslast im Abwasser",
+        "chart_sub": "GAM-Modellierte Trends &amp; 95%-Konfidenzintervall • Quelle: RKI/UBA AMELAG",
+        "chart_scale_linear": "Lineare Skala (Genkopien / Liter)",
+        "chart_scale_log": "Logarithmische Skala (Log₁₀)",
+        "legend_flu": "Grippe (Flu A+B)",
+        "legend_rsv": "RSV (A+B)",
+        "ci_band": "95% KI",
+        "unit_y": "Genkopien / Liter",
+        "no_js_note": "Hinweis: Sie betrachten die statische barrierefreie Version des Dashboards (ohne JavaScript). Alle bundesweiten Daten, Grafiken und Tabellen sind vollständig geladen und lesbar.",
+        "desc_linear": "Lineare Skala zeigt die absolute physikalische Viruslast im Abwasser.",
+        "desc_log": "Logarithmische Skala verdeutlicht Vervielfachungsraten und exponentielle Dynamik bei niedrigen und hohen Werten gleichermaßen.",
+        "chart_expl": "Erklärung: Die durchgezogene Linie repräsentiert den GAM-Regressionswert (generalisiertes additives Modell mit adaptiver Glättung). Das schattierte Band stellt das punktweise 95%-Konfidenzintervall dar. Alle Angaben in Genkopien pro Liter Abwasser.",
+        "download_svg_lin": "SVG (Linear) herunterladen",
+        "download_svg_log": "SVG (Logarithmisch) herunterladen",
+        "download_json": "JSON-Rohdaten",
+        "states_overview": "Bundesländer Übersicht",
+        "states_sub": "SARS-CoV-2 Viruslast &amp; 7-Tage-Trend nach Bundesland",
+        "th_state": "Bundesland",
+        "th_plants": "Kläranlagen",
+        "th_population": "Bevölkerung",
+        "th_sars": "SARS-CoV-2",
+        "th_trend": "Trend (7d)",
+        "pathogen_comp": "Erreger-Vergleich (Deutschlandweit)",
+        "pathogen_comp_sub": "Aktuelle Werte im Vergleich zu historischen Höchstständen",
+        "th_pathogen": "Erreger",
+        "th_current_val": "Aktuell (Kopien/L)",
+        "th_sites_cov": "Klärwerke (Abdeckung)",
+        "th_hist_peak": "Historischer Peak",
+        "method_heading": "Über den AMELAG-Datensatz &amp; Methodik",
+        "method_intro": "Das Projekt <strong>AMELAG</strong> (<em>Abwassersurveillance zur epidemiologischen Lageerfassung</em>) ist eine gemeinsame Initiative des <strong>Robert Koch-Instituts (RKI)</strong> und des <strong>Umweltbundesamts (UBA)</strong>. Seit Februar 2022 wird in einem bundesweiten Verbund aus Kläranlagen, Laboren und Fachbehörden die Konzentration von Krankheitserregern im Rohabwasser fortlaufend überwacht.",
+        "why_scales_heading": "Warum lineare und logarithmische Darstellung?",
+        "why_scales_li1": "<strong>Lineare Skala:</strong> Zeigt die tatsächliche physikalische Konzentration der Viren im Abwasser. Dies verdeutlicht das absolute Ausmaß großer Infektionswellen im Vergleich zu ruhigen Sommerphasen.",
+        "why_scales_li2": "<strong>Logarithmische Skala (Log₁₀):</strong> Da sich Viren in der Anfangsphase einer Welle exponentiell vermehren, entspricht eine exponentielle Zunahme auf der logarithmischen Achse einer Geraden. Dies erlaubt die frühe Erkennung von Trendwechseln und den gleichzeitigen Vergleich von Erregern mit unterschiedlichen Grundlasten (z. B. SARS-CoV-2 vs. RSV).",
+        "norm_gam_heading": "Normalisierung und GAM-Modellierung",
+        "norm_gam_p": "Um Schwankungen durch Niederschläge, Schmelzwasser oder gewerbliche Einleitungen auszugleichen, wird die gemessene Viruslast über den Abwasserdurchfluss der Kläranlage normalisiert. Anschließend wird eine GAM-Regression (Generalized Additive Model) mit adaptiver Spline-Glättung berechnet, um den übergeordneten epidemiologischen Trend robuster gegenüber einzelnen Messtoleranzen abzubilden.",
+        "license_text": "<strong>Datenlizenz:</strong> Die Rohdaten stehen unter der Lizenz <a href=\"https://creativecommons.org/licenses/by/4.0/deed.de\" target=\"_blank\" rel=\"noopener noreferrer\">Creative Commons Namensnennung 4.0 International (CC BY 4.0)</a> bzw. Datenlizenz Deutschland – Namensnennung – Version 2.0. Quelle: Robert Koch-Institut (RKI) &amp; Umweltbundesamt (UBA), Zenodo Datensatz AMELAG.",
+        "footer_text": "AMELAG Abwassermonitor • Statische Webapplikation für GitHub Pages • Entwickelt mit barrierefreiem Fallback für Low-Performance &amp; Terminal-Browser.",
+        "footer_orig": "Original RKI Repository",
+        "footer_info": "RKI Fachinformation",
+        "footer_uba": "Umweltbundesamt",
+        "lang_switch_aria": "Sprache auswählen / Select Language"
+    },
+    "en": {
+        "lang": "en",
+        "doc_title": "AMELAG Wastewater Monitor | Robert Koch Institute & UBA Wastewater Surveillance",
+        "doc_desc": "Interactive dashboard for German nationwide wastewater surveillance (AMELAG) by RKI and UBA. Time series for SARS-CoV-2, Influenza A/B, and RSV in linear and logarithmic scale.",
+        "keywords": "Wastewater surveillance, AMELAG, RKI, Robert Koch Institute, SARS-CoV-2, COVID-19, Flu, Influenza, RSV, viral load, wastewater treatment plant, Germany",
+        "og_title": "AMELAG Wastewater Monitor - Germany",
+        "og_desc": "Weekly viral loads of SARS-CoV-2, Influenza, and RSV from 169 wastewater treatment plants across Germany with linear and logarithmic visualization.",
+        "brand_title": "Wastewater Surveillance Germany",
+        "brand_sub": "Robert Koch Institute &amp; Federal Environment Agency • As of:",
+        "rki_dataset": "RKI Dataset",
+        "theme_toggle": "Switch Theme",
+        "skip_link": "Skip to main content",
+        "kpi_unit": "Gene copies/L",
+        "vs_prev_week": "vs. previous week",
+        "peak": "Peak:",
+        "surveillance_net": "Surveillance Network",
+        "nationwide": "Nationwide (Germany)",
+        "plants": "Treatment Plants",
+        "covered_pop": "Covered Population:",
+        "active_rep": "Active Reporting:",
+        "sites": "Sites",
+        "filter_pathogen": "Pathogen:",
+        "filter_scale": "Scale:",
+        "scale_linear": "Linear",
+        "scale_log": "Log₁₀",
+        "scale_linear_title": "Linear scale (absolute viral concentration)",
+        "scale_log_title": "Logarithmic scale (exponential growth &amp; dynamics)",
+        "filter_time": "Time Range:",
+        "preset_all": "All Data (2022–present)",
+        "preset_30d": "Last 30 Days",
+        "preset_90d": "Last 90 Days (3 Months)",
+        "preset_6m": "Last 6 Months",
+        "preset_1y": "Last 1 Year (12 Months)",
+        "preset_2y": "Last 2 Years",
+        "preset_custom": "Custom (Slider)",
+        "slider_label": "Time Window Slider:",
+        "slider_from": "From:",
+        "slider_to": "To:",
+        "filter_state": "Federal State:",
+        "all_states": "Germany (Nationwide)",
+        "filter_site": "Wastewater Plant (Site):",
+        "all_sites": "All Sites (Aggregated)",
+        "filter_metric": "Metric:",
+        "metric_pred": "GAM Regression (Smoothed + 95% CI)",
+        "metric_norm": "Flow-Normalized Viral Load",
+        "metric_raw": "Measured Viral Load (Raw)",
+        "export_csv": "💾 Export CSV",
+        "export_svg": "📊 Export SVG",
+        "reset_filters": "↺ Reset",
+        "chart_title_prefix": "National Viral Load in Wastewater",
+        "chart_sub": "GAM-Modeled Trends &amp; 95% Confidence Interval • Source: RKI/UBA AMELAG",
+        "chart_scale_linear": "Linear Scale (Gene copies / Liter)",
+        "chart_scale_log": "Logarithmic Scale (Log₁₀)",
+        "legend_flu": "Influenza (Flu A+B)",
+        "legend_rsv": "RSV (A+B)",
+        "ci_band": "95% CI",
+        "unit_y": "Gene copies / Liter",
+        "no_js_note": "Note: You are viewing the static accessible version of the dashboard (without JavaScript). All nationwide data, charts, and tables are fully loaded and readable.",
+        "desc_linear": "Linear scale shows the absolute physical viral load in wastewater.",
+        "desc_log": "Logarithmic scale highlights multiplication rates and exponential dynamics across both low and high values.",
+        "chart_expl": "Explanation: The solid line represents the GAM regression value (Generalized Additive Model with adaptive smoothing). The shaded band represents the pointwise 95% confidence interval. All values in gene copies per liter of wastewater.",
+        "download_svg_lin": "Download SVG (Linear)",
+        "download_svg_log": "Download SVG (Logarithmic)",
+        "download_json": "Raw JSON Data",
+        "states_overview": "Federal States Overview",
+        "states_sub": "SARS-CoV-2 Viral Load &amp; 7-Day Trend by Federal State",
+        "th_state": "Federal State",
+        "th_plants": "Treatment Plants",
+        "th_population": "Population",
+        "th_sars": "SARS-CoV-2",
+        "th_trend": "Trend (7d)",
+        "pathogen_comp": "Pathogen Comparison (Nationwide)",
+        "pathogen_comp_sub": "Current values compared to historical peaks",
+        "th_pathogen": "Pathogen",
+        "th_current_val": "Current (copies/L)",
+        "th_sites_cov": "Plants (Coverage)",
+        "th_hist_peak": "Historical Peak",
+        "method_heading": "About the AMELAG Dataset &amp; Methodology",
+        "method_intro": "The <strong>AMELAG</strong> project (<em>Wastewater Surveillance for Epidemiological Situation Assessment</em>) is a joint initiative of the <strong>Robert Koch Institute (RKI)</strong> and the <strong>German Environment Agency (UBA)</strong>. Since February 2022, pathogen concentrations in raw wastewater have been continuously monitored across a nationwide network of treatment plants, laboratories, and health authorities.",
+        "why_scales_heading": "Why Linear and Logarithmic Visualization?",
+        "why_scales_li1": "<strong>Linear Scale:</strong> Shows the actual physical concentration of viruses in wastewater, illustrating the absolute scale of major infection waves compared to low baseline periods.",
+        "why_scales_li2": "<strong>Logarithmic Scale (Log₁₀):</strong> Because viruses replicate exponentially during the early phase of an outbreak, exponential growth appears as a straight line with constant slope. This facilitates early trend detection and enables simultaneous comparison of pathogens with widely differing baselines (e.g. SARS-CoV-2 vs. RSV).",
+        "norm_gam_heading": "Normalization and GAM Modeling",
+        "norm_gam_p": "To compensate for variations caused by precipitation, snowmelt, or industrial inflows, measured viral loads are normalized by plant wastewater flow. A Generalized Additive Model (GAM) with adaptive spline smoothing is then applied to extract the underlying epidemiological trend with high resilience against individual measurement noise.",
+        "license_text": "<strong>Data License:</strong> Raw data is licensed under <a href=\"https://creativecommons.org/licenses/by/4.0/\" target=\"_blank\" rel=\"noopener noreferrer\">Creative Commons Attribution 4.0 International (CC BY 4.0)</a> / Data License Germany – Attribution – Version 2.0. Source: Robert Koch Institute (RKI) &amp; Federal Environment Agency (UBA), Zenodo AMELAG dataset.",
+        "footer_text": "AMELAG Wastewater Monitor • Static Web Application for GitHub Pages • Built with accessible fallback for low-performance &amp; terminal browsers.",
+        "footer_orig": "Original RKI Repository",
+        "footer_info": "RKI Technical Information",
+        "footer_uba": "German Environment Agency (UBA)",
+        "lang_switch_aria": "Select Language / Sprache auswählen"
+    }
+}
+
+def format_date_str(date_str, lang="de"):
+    if not date_str:
+        return ""
+    try:
+        dt = datetime.strptime(date_str, "%Y-%m-%d")
+        if lang == "en":
+            return dt.strftime("%b %d, %Y")
+        else:
+            months_de = ["", "Jan.", "Feb.", "März", "Apr.", "Mai", "Juni", "Juli", "Aug.", "Sept.", "Okt.", "Nov.", "Dez."]
+            return f"{dt.day}. {months_de[dt.month]} {dt.year}"
+    except Exception:
+        return date_str
+
+def format_num_str(val, decimals=0, lang="de"):
+    if val is None:
+        return "—"
+    if decimals == 0:
+        val = round(val)
+        if lang == "de":
+            return f"{val:,}".replace(",", ".")
+        else:
+            return f"{val:,}"
+    else:
+        if lang == "de":
+            return f"{val:,.{decimals}f}".replace(",", "X").replace(".", ",").replace("X", ".")
+        else:
+            return f"{val:,.{decimals}f}"
 
 PATHOGEN_COLORS = {
     "SARS-CoV-2": "#4f46e5",    # Indigo
@@ -389,12 +616,13 @@ def build_data(root_dir="."):
     print(f"Data generation complete! Latest date: {latest_global_date}. Total sites: {len(site_metadata)}.")
     return national_data, states_summary, sites_index
 
-def generate_svg_chart(national_data, scale="linear", width=960, height=480):
+def generate_svg_chart(national_data, scale="linear", width=960, height=480, lang="de"):
     """
     Generates a crisp, accessible, standalone SVG chart of the national SARS-CoV-2 curve
     with confidence intervals and comparison with Influenza A+B and RSV A+B.
     Works without any JavaScript.
     """
+    t = I18N.get(lang, I18N["de"])
     sars = national_data["series"].get("SARS-CoV-2", [])
     flu = national_data["series"].get("Influenza A+B", [])
     rsv = national_data["series"].get("RSV A+B", [])
@@ -554,12 +782,15 @@ def generate_svg_chart(national_data, scale="linear", width=960, height=480):
             rsv_points.append(f"{xc},{yc}")
     rsv_path_d = f"M {rsv_points[0]} " + " ".join([f"L {pt}" for pt in rsv_points[1:]]) if rsv_points else ""
 
-    scale_title = "Logarithmische Skala (Log₁₀)" if scale == "log" else "Lineare Skala (Genkopien / Liter)"
+    scale_title = t["chart_scale_log"] if scale == "log" else t["chart_scale_linear"]
+    desc_text = (f"Time series of SARS-CoV-2, Influenza, and RSV viral load in wastewater (Germany, {min_date} to {max_date})."
+                 if lang == "en" else
+                 f"Zeitreihe der SARS-CoV-2, Influenza und RSV Viruslast im Abwasser (Deutschland, {min_date} bis {max_date}).")
 
     svg = [
-        f'<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 {width} {height}" class="amelag-chart-svg" role="img" aria-label="Bundesweite Abwassersurveillance Zeitreihe ({scale_title})">',
-        f'  <title>AMELAG Abwassersurveillance Deutschland - {scale_title}</title>',
-        f'  <desc>Zeitreihe der SARS-CoV-2, Influenza und RSV Viruslast im Abwasser (Deutschland, {min_date} bis {max_date}).</desc>',
+        f'<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 {width} {height}" class="amelag-chart-svg" role="img" aria-label="{t["chart_title_prefix"]} ({scale_title})">',
+        f'  <title>{t["brand_title"]} - {scale_title}</title>',
+        f'  <desc>{desc_text}</desc>',
         '  <defs>',
         '    <linearGradient id="ciGrad" x1="0%" y1="0%" x2="0%" y2="100%">',
         '      <stop offset="0%" stop-color="#4f46e5" stop-opacity="0.25" />',
@@ -610,8 +841,8 @@ def generate_svg_chart(national_data, scale="linear", width=960, height=480):
     svg.append('  </g>')
 
     # Chart Header / Legend
-    svg.append(f'  <text x="{margin_l}" y="{margin_t - 22}" font-size="14" font-weight="700" fill="var(--text-color, #0f172a)" font-family="system-ui, sans-serif">Bundesweite Viruslast im Abwasser ({scale_title})</text>')
-    svg.append(f'  <text x="{margin_l}" y="{margin_t - 6}" font-size="11" fill="var(--text-muted, #64748b)" font-family="system-ui, sans-serif">GAM-Modellierte Trends &amp; 95%-Konfidenzintervall • Quelle: RKI/UBA AMELAG</text>')
+    svg.append(f'  <text x="{margin_l}" y="{margin_t - 22}" font-size="14" font-weight="700" fill="var(--text-color, #0f172a)" font-family="system-ui, sans-serif">{t["chart_title_prefix"]} ({scale_title})</text>')
+    svg.append(f'  <text x="{margin_l}" y="{margin_t - 6}" font-size="11" fill="var(--text-muted, #64748b)" font-family="system-ui, sans-serif">{t["chart_sub"]}</text>')
 
     # Legend items in top right
     leg_x = width - margin_r - 420
@@ -621,41 +852,35 @@ def generate_svg_chart(national_data, scale="linear", width=960, height=480):
         '    <line x1="0" y1="0" x2="16" y2="0" stroke="#4f46e5" stroke-width="3" />',
         '    <text x="22" y="3" fill="var(--text-color, #1e293b)" font-weight="600">SARS-CoV-2</text>',
         '    <line x1="110" y1="0" x2="126" y2="0" stroke="#ea580c" stroke-width="2" />',
-        '    <text x="132" y="3" fill="var(--text-color, #1e293b)">Grippe (Flu A+B)</text>',
+        f'    <text x="132" y="3" fill="var(--text-color, #1e293b)">{t["legend_flu"]}</text>',
         '    <line x1="240" y1="0" x2="256" y2="0" stroke="#ec4899" stroke-width="2" />',
-        '    <text x="262" y="3" fill="var(--text-color, #1e293b)">RSV (A+B)</text>',
+        f'    <text x="262" y="3" fill="var(--text-color, #1e293b)">{t["legend_rsv"]}</text>',
         '    <rect x="340" y="-5" width="12" height="10" fill="#4f46e5" fill-opacity="0.25" />',
-        '    <text x="358" y="3" fill="var(--text-muted, #64748b)">95% KI</text>',
+        f'    <text x="358" y="3" fill="var(--text-muted, #64748b)">{t["ci_band"]}</text>',
         '  </g>'
     ])
 
     # Y-axis label
-    svg.append(f'  <text transform="rotate(-90)" x="{-margin_t - plot_h/2}" y="20" text-anchor="middle" font-size="11" font-weight="500" fill="var(--text-muted, #64748b)" font-family="system-ui, sans-serif">Genkopien / Liter ({scale_title})</text>')
+    svg.append(f'  <text transform="rotate(-90)" x="{-margin_t - plot_h/2}" y="20" text-anchor="middle" font-size="11" font-weight="500" fill="var(--text-muted, #64748b)" font-family="system-ui, sans-serif">{t["unit_y"]} ({scale_title})</text>')
     svg.append('</svg>')
 
     return "\n".join(svg)
 
-def generate_static_html(national_data, states_data, sites_index, root_dir="."):
+def generate_static_html(national_data, states_data, sites_index, root_dir=".", lang="de", filename="index.html", path_prefix=""):
     """
-    Renders index.html containing full semantic pre-rendered data, KPI cards,
+    Renders static HTML containing full semantic pre-rendered data, KPI cards,
     state breakdown table, and pre-rendered SVG charts for both Linear and Log scales.
-    Enhanced with modern interactive JS SPA.
+    Enhanced with modern interactive JS SPA. Supports bilingual pre-rendering (de/en).
     """
+    t = I18N.get(lang, I18N["de"])
     meta = national_data["meta"]
     p_stats = meta["pathogens"]
     sars_stat = p_stats.get("SARS-CoV-2", {})
     flu_stat = p_stats.get("Influenza A+B", {})
     rsv_stat = p_stats.get("RSV A+B", {})
 
-    svg_linear = generate_svg_chart(national_data, scale="linear", width=980, height=480)
-    svg_log = generate_svg_chart(national_data, scale="log", width=980, height=480)
-
-    # Save standalone SVGs as well for direct download/view
-    os.makedirs(os.path.join(root_dir, "assets"), exist_ok=True)
-    with open(os.path.join(root_dir, "assets", "national_chart_linear.svg"), "w", encoding="utf-8") as f:
-        f.write(svg_linear)
-    with open(os.path.join(root_dir, "assets", "national_chart_log.svg"), "w", encoding="utf-8") as f:
-        f.write(svg_log)
+    svg_linear = generate_svg_chart(national_data, scale="linear", width=980, height=480, lang=lang)
+    svg_log = generate_svg_chart(national_data, scale="log", width=980, height=480, lang=lang)
 
     # Helper for trend arrow
     def trend_badge(pct):
@@ -671,8 +896,8 @@ def generate_static_html(national_data, states_data, sites_index, root_dir="."):
     # Build State rows for pre-rendered table
     state_rows_html = []
     for code, s_info in sorted(states_data["states"].items(), key=lambda x: x[1]["population"], reverse=True):
-        pop_fmt = f"{s_info['population']:,}".replace(",", ".")
-        sars_val = f"{s_info['latest_sars']:,.0f}".replace(",", ".") if s_info['latest_sars'] else "—"
+        pop_fmt = format_num_str(s_info['population'], 0, lang)
+        sars_val = format_num_str(s_info['latest_sars'], 0, lang) if s_info['latest_sars'] else "—"
         badge = trend_badge(s_info['trend_7d'])
         state_rows_html.append(f"""
         <tr data-state="{code}">
@@ -690,41 +915,69 @@ def generate_static_html(national_data, states_data, sites_index, root_dir="."):
         stat = p_stats.get(typ)
         if not stat:
             continue
-        p_name = PATHOGEN_NAMES.get(typ, typ)
-        val_fmt = f"{stat['latest_pred']:,.0f}".replace(",", ".")
-        peak_fmt = f"{stat['peak_value']:,.0f}".replace(",", ".")
+        p_name = PATHOGEN_NAMES[lang].get(typ, typ)
+        val_fmt = format_num_str(stat['latest_pred'], 0, lang)
+        peak_fmt = format_num_str(stat['peak_value'], 0, lang)
         cov_pct = f"{stat['latest_cov']*100:.1f}%" if stat['latest_cov'] else "—"
         badge = trend_badge(stat['chg_7d_pct'])
+        peak_date_fmt = format_date_str(stat['peak_date'], lang)
         pathogen_rows_html.append(f"""
         <tr>
           <td><span class="pathogen-dot" style="background-color: {PATHOGEN_COLORS.get(typ, '#64748b')}"></span> <strong>{p_name}</strong></td>
           <td class="text-right font-mono font-bold">{val_fmt}</td>
           <td class="text-center">{badge}</td>
           <td class="text-right">{stat['latest_n']} ({cov_pct})</td>
-          <td class="text-right font-mono text-muted">{peak_fmt} <small>({stat['peak_date']})</small></td>
+          <td class="text-right font-mono text-muted">{peak_fmt} <small>({peak_date_fmt})</small></td>
         </tr>""")
     pathogen_table_body = "\n".join(pathogen_rows_html)
 
+    de_href = f"{path_prefix}index.html"
+    en_href = f"{path_prefix}en.html"
+    active_de = "active" if lang == "de" else ""
+    active_en = "active" if lang == "en" else ""
+    css_path = f"{path_prefix}css/dashboard.css"
+    js_path = f"{path_prefix}js/dashboard.js"
+    assets_prefix = f"{path_prefix}assets/"
+    data_prefix = f"{path_prefix}data/"
+
+    formatted_latest_date = format_date_str(meta['latest_date'], lang)
+    total_pop_fmt = format_num_str(meta['total_population'], 0, lang)
+
+    sars_val_fmt = format_num_str(sars_stat.get('latest_pred', 0), 0, lang)
+    sars_peak_fmt = format_num_str(sars_stat.get('peak_value', 0), 0, lang)
+    sars_peak_date = format_date_str(sars_stat.get('peak_date', ''), lang)
+    sars_latest_date = format_date_str(sars_stat.get('latest_date', ''), lang)
+
+    flu_val_fmt = format_num_str(flu_stat.get('latest_pred', 0), 0, lang)
+    flu_peak_fmt = format_num_str(flu_stat.get('peak_value', 0), 0, lang)
+    flu_peak_date = format_date_str(flu_stat.get('peak_date', ''), lang)
+    flu_latest_date = format_date_str(flu_stat.get('latest_date', ''), lang)
+
+    rsv_val_fmt = format_num_str(rsv_stat.get('latest_pred', 0), 0, lang)
+    rsv_peak_fmt = format_num_str(rsv_stat.get('peak_value', 0), 0, lang)
+    rsv_peak_date = format_date_str(rsv_stat.get('peak_date', ''), lang)
+    rsv_latest_date = format_date_str(rsv_stat.get('latest_date', ''), lang)
+
     # HTML template with No-JS support, accessible landmarks, and rich JS SPA
     html_content = f"""<!DOCTYPE html>
-<html lang="de">
+<html lang="{lang}">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>AMELAG Abwassermonitor | Robert Koch-Institut &amp; UBA Abwassersurveillance</title>
-  <meta name="description" content="Interaktives Dashboard zur bundesweiten Abwassersurveillance (AMELAG) von RKI und UBA. Zeitreihen für SARS-CoV-2, Influenza A/B und RSV in linearer und logarithmischer Skalierung.">
-  <meta name="keywords" content="Abwassersurveillance, AMELAG, RKI, Robert Koch-Institut, SARS-CoV-2, Corona, Grippe, Influenza, RSV, Viruslast, Klärwerk, Deutschland">
+  <title>{t['doc_title']}</title>
+  <meta name="description" content="{t['doc_desc']}">
+  <meta name="keywords" content="{t['keywords']}">
   <meta name="author" content="Robert Koch-Institut &amp; Umweltbundesamt / AMELAG">
   <meta name="theme-color" content="#4f46e5">
 
   <!-- Open Graph / Social Media Meta Tags -->
-  <meta property="og:title" content="AMELAG Abwassermonitor - Deutschland">
-  <meta property="og:description" content="Wöchentliche Viruslasten von SARS-CoV-2, Influenza und RSV aus 169 Kläranlagen in ganz Deutschland mit linearer und logarithmischer Visualisierung.">
+  <meta property="og:title" content="{t['og_title']}">
+  <meta property="og:description" content="{t['og_desc']}">
   <meta property="og:type" content="website">
-  <meta property="og:url" content="https://robert-koch-institut.github.io/Abwassersurveillance_AMELAG/">
-  <meta property="og:image" content="assets/national_chart_linear.svg">
+  <meta property="og:url" content="https://mgomezch.github.io/amelag-dashboard/">
+  <meta property="og:image" content="{assets_prefix}national_chart_linear.svg">
 
-  <link rel="stylesheet" href="css/dashboard.css">
+  <link rel="stylesheet" href="{css_path}">
   
   <noscript>
     <style>
@@ -735,7 +988,7 @@ def generate_static_html(national_data, states_data, sites_index, root_dir="."):
   </noscript>
 </head>
 <body>
-  <a href="#main-content" class="skip-link">Zum Hauptinhalt springen</a>
+  <a href="#main-content" class="skip-link" data-i18n="skip_link">{t['skip_link']}</a>
 
   <!-- Header -->
   <header class="app-header" role="banner">
@@ -743,17 +996,22 @@ def generate_static_html(national_data, states_data, sites_index, root_dir="."):
       <div class="brand">
         <div class="brand-badge">AMELAG</div>
         <div>
-          <h1 class="brand-title">Abwassersurveillance Deutschland</h1>
-          <p class="brand-subtitle">Robert Koch-Institut &amp; Umweltbundesamt • Datenstand: <time id="header-data-date" datetime="{meta['latest_date']}">{meta['latest_date']}</time></p>
+          <h1 class="brand-title" data-i18n="brand_title">{t['brand_title']}</h1>
+          <p class="brand-subtitle"><span data-i18n="brand_sub">{t['brand_sub']}</span> <time id="header-data-date" datetime="{meta['latest_date']}">{formatted_latest_date}</time></p>
         </div>
       </div>
       <div class="header-actions">
-        <button id="theme-toggle" class="btn btn-icon js-only" aria-label="Farbschema wechseln" title="Hell/Dunkel umschalten">
+        <div class="lang-switch" role="group" aria-label="{t['lang_switch_aria']}">
+          <a href="{de_href}" class="lang-btn {active_de}" data-lang="de" aria-label="Deutsch">DE</a>
+          <span class="lang-divider" aria-hidden="true">|</span>
+          <a href="{en_href}" class="lang-btn {active_en}" data-lang="en" aria-label="English">EN</a>
+        </div>
+        <button id="theme-toggle" class="btn btn-icon js-only" aria-label="{t['theme_toggle']}" title="{t['theme_toggle']}">
           <span class="icon-sun">☀️</span><span class="icon-moon">🌙</span>
         </button>
-        <a href="https://github.com/robert-koch-institut/Abwassersurveillance_AMELAG" target="_blank" rel="noopener noreferrer" class="btn btn-outline" title="GitHub Repository öffnen">
+        <a href="https://github.com/robert-koch-institut/Abwassersurveillance_AMELAG" target="_blank" rel="noopener noreferrer" class="btn btn-outline" title="{t['rki_dataset']}">
           <svg class="icon-github" viewBox="0 0 16 16" width="16" height="16" fill="currentColor" aria-hidden="true"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"/></svg>
-          <span>RKI Datensatz</span>
+          <span data-i18n="rki_dataset">{t['rki_dataset']}</span>
         </a>
       </div>
     </div>
@@ -763,70 +1021,70 @@ def generate_static_html(national_data, states_data, sites_index, root_dir="."):
   <main id="main-content" class="container" role="main">
     
     <!-- KPI Hero Summary Cards -->
-    <section class="kpi-grid" aria-label="Wichtigste Kennzahlen">
+    <section class="kpi-grid" aria-label="Wichtigste Kennzahlen / Key Metrics">
       <div class="kpi-card" id="kpi-sars">
         <div class="kpi-header">
           <span class="pathogen-pill pathogen-sars">SARS-CoV-2</span>
-          <span class="kpi-date">{sars_stat.get('latest_date', '')}</span>
+          <span class="kpi-date">{sars_latest_date}</span>
         </div>
         <div class="kpi-value-row">
-          <span class="kpi-value" id="kpi-sars-val">{sars_stat.get('latest_pred', 0):,.0f}</span>
-          <span class="kpi-unit">Genkopien/L</span>
+          <span class="kpi-value" id="kpi-sars-val">{sars_val_fmt}</span>
+          <span class="kpi-unit" data-i18n="kpi_unit">{t['kpi_unit']}</span>
         </div>
         <div class="kpi-footer">
-          <span class="kpi-trend" id="kpi-sars-trend">{trend_badge(sars_stat.get('chg_7d_pct'))} vs. Vorwoche</span>
-          <span class="kpi-sub">Peak: {sars_stat.get('peak_value', 0):,.0f} ({sars_stat.get('peak_date', '')})</span>
+          <span class="kpi-trend" id="kpi-sars-trend">{trend_badge(sars_stat.get('chg_7d_pct'))} {t['vs_prev_week']}</span>
+          <span class="kpi-sub">{t['peak']} {sars_peak_fmt} ({sars_peak_date})</span>
         </div>
       </div>
 
       <div class="kpi-card" id="kpi-flu">
         <div class="kpi-header">
-          <span class="pathogen-pill pathogen-flu">Influenza A+B (Grippe)</span>
-          <span class="kpi-date">{flu_stat.get('latest_date', '')}</span>
+          <span class="pathogen-pill pathogen-flu">{PATHOGEN_NAMES[lang]['Influenza A+B']}</span>
+          <span class="kpi-date">{flu_latest_date}</span>
         </div>
         <div class="kpi-value-row">
-          <span class="kpi-value" id="kpi-flu-val">{flu_stat.get('latest_pred', 0):,.0f}</span>
-          <span class="kpi-unit">Genkopien/L</span>
+          <span class="kpi-value" id="kpi-flu-val">{flu_val_fmt}</span>
+          <span class="kpi-unit" data-i18n="kpi_unit">{t['kpi_unit']}</span>
         </div>
         <div class="kpi-footer">
-          <span class="kpi-trend" id="kpi-flu-trend">{trend_badge(flu_stat.get('chg_7d_pct'))} vs. Vorwoche</span>
-          <span class="kpi-sub">Peak: {flu_stat.get('peak_value', 0):,.0f} ({flu_stat.get('peak_date', '')})</span>
+          <span class="kpi-trend" id="kpi-flu-trend">{trend_badge(flu_stat.get('chg_7d_pct'))} {t['vs_prev_week']}</span>
+          <span class="kpi-sub">{t['peak']} {flu_peak_fmt} ({flu_peak_date})</span>
         </div>
       </div>
 
       <div class="kpi-card" id="kpi-rsv">
         <div class="kpi-header">
-          <span class="pathogen-pill pathogen-rsv">RSV (A+B)</span>
-          <span class="kpi-date">{rsv_stat.get('latest_date', '')}</span>
+          <span class="pathogen-pill pathogen-rsv">{PATHOGEN_NAMES[lang]['RSV A+B']}</span>
+          <span class="kpi-date">{rsv_latest_date}</span>
         </div>
         <div class="kpi-value-row">
-          <span class="kpi-value" id="kpi-rsv-val">{rsv_stat.get('latest_pred', 0):,.0f}</span>
-          <span class="kpi-unit">Genkopien/L</span>
+          <span class="kpi-value" id="kpi-rsv-val">{rsv_val_fmt}</span>
+          <span class="kpi-unit" data-i18n="kpi_unit">{t['kpi_unit']}</span>
         </div>
         <div class="kpi-footer">
-          <span class="kpi-trend" id="kpi-rsv-trend">{trend_badge(rsv_stat.get('chg_7d_pct'))} vs. Vorwoche</span>
-          <span class="kpi-sub">Peak: {rsv_stat.get('peak_value', 0):,.0f} ({rsv_stat.get('peak_date', '')})</span>
+          <span class="kpi-trend" id="kpi-rsv-trend">{trend_badge(rsv_stat.get('chg_7d_pct'))} {t['vs_prev_week']}</span>
+          <span class="kpi-sub">{t['peak']} {rsv_peak_fmt} ({rsv_peak_date})</span>
         </div>
       </div>
 
       <div class="kpi-card" id="kpi-coverage">
         <div class="kpi-header">
-          <span class="pathogen-pill pathogen-neutral">Überwachungsnetz</span>
-          <span class="kpi-date">Deutschlandweit</span>
+          <span class="pathogen-pill pathogen-neutral" data-i18n="surveillance_net">{t['surveillance_net']}</span>
+          <span class="kpi-date" data-i18n="nationwide">{t['nationwide']}</span>
         </div>
         <div class="kpi-value-row">
           <span class="kpi-value">{meta['total_sites']}</span>
-          <span class="kpi-unit">Kläranlagen</span>
+          <span class="kpi-unit" data-i18n="plants">{t['plants']}</span>
         </div>
         <div class="kpi-footer">
-          <span class="kpi-sub">Versorgte Bevölkerung: <strong>{meta['total_population']:,}</strong></span>
-          <span class="kpi-sub">Aktive Berichterstattung: {sars_stat.get('latest_n', 0)} Standorte</span>
+          <span class="kpi-sub"><span data-i18n="covered_pop">{t['covered_pop']}</span> <strong>{total_pop_fmt}</strong></span>
+          <span class="kpi-sub"><span data-i18n="active_rep">{t['active_rep']}</span> {sars_stat.get('latest_n', 0)} <span data-i18n="sites">{t['sites']}</span></span>
         </div>
       </div>
     </section>
 
     <!-- Main Chart Section -->
-    <section class="card chart-card" aria-label="Hauptgrafik Viruslast">
+    <section class="card chart-card" aria-label="Hauptgrafik Viruslast / Main Viral Load Chart">
       
       <!-- Interactive Filter Controls (Enhanced via JS) -->
       <div class="chart-controls js-only">
@@ -834,37 +1092,37 @@ def generate_static_html(national_data, states_data, sites_index, root_dir="."):
         <!-- Row 1: Pathogen & Scale Toggles -->
         <div class="controls-row">
           <div class="control-group">
-            <label class="control-label" for="filter-pathogen">Erreger:</label>
-            <select id="filter-pathogen" class="select-input" aria-label="Erreger auswählen">
-              <option value="SARS-CoV-2" selected>SARS-CoV-2 (COVID-19)</option>
-              <option value="Influenza A+B">Influenza A+B (Grippe gesamt)</option>
-              <option value="Influenza A">Influenza A</option>
-              <option value="Influenza B">Influenza B</option>
-              <option value="RSV A+B">RSV A+B (RS-Virus gesamt)</option>
-              <option value="RSV A">RSV A</option>
-              <option value="RSV B">RSV B</option>
-              <option value="COMPARE_ALL">⚡ Multi-Vergleich (SARS + Flu + RSV)</option>
+            <label class="control-label" for="filter-pathogen" data-i18n="filter_pathogen">{t['filter_pathogen']}</label>
+            <select id="filter-pathogen" class="select-input" aria-label="{t['filter_pathogen']}">
+              <option value="SARS-CoV-2" selected>{PATHOGEN_NAMES[lang]['SARS-CoV-2']}</option>
+              <option value="Influenza A+B">{PATHOGEN_NAMES[lang]['Influenza A+B']}</option>
+              <option value="Influenza A">{PATHOGEN_NAMES[lang]['Influenza A']}</option>
+              <option value="Influenza B">{PATHOGEN_NAMES[lang]['Influenza B']}</option>
+              <option value="RSV A+B">{PATHOGEN_NAMES[lang]['RSV A+B']}</option>
+              <option value="RSV A">{PATHOGEN_NAMES[lang]['RSV A']}</option>
+              <option value="RSV B">{PATHOGEN_NAMES[lang]['RSV B']}</option>
+              <option value="COMPARE_ALL">{PATHOGEN_NAMES[lang]['COMPARE_ALL']}</option>
             </select>
           </div>
 
           <div class="control-group">
-            <span class="control-label">Skalierung:</span>
-            <div class="btn-group" role="group" aria-label="Skalierung">
-              <button type="button" id="btn-scale-linear" class="btn btn-toggle active" data-scale="linear" title="Lineare Darstellung (absolute Virusmenge)">Linear</button>
-              <button type="button" id="btn-scale-log" class="btn btn-toggle" data-scale="log" title="Logarithmische Darstellung (Exponentielles Wachstum &amp; Dynamik)">Log₁₀</button>
+            <span class="control-label" data-i18n="filter_scale">{t['filter_scale']}</span>
+            <div class="btn-group" role="group" aria-label="{t['filter_scale']}">
+              <button type="button" id="btn-scale-linear" class="btn btn-toggle active" data-scale="linear" title="{t['scale_linear_title']}" data-i18n="scale_linear">{t['scale_linear']}</button>
+              <button type="button" id="btn-scale-log" class="btn btn-toggle" data-scale="log" title="{t['scale_log_title']}" data-i18n="scale_log">{t['scale_log']}</button>
             </div>
           </div>
 
           <div class="control-group">
-            <label class="control-label" for="filter-time-preset">Zeitraum:</label>
-            <select id="filter-time-preset" class="select-input" aria-label="Zeitraum auswählen">
-              <option value="all">Alle Daten (Gesamt 2022–heute)</option>
-              <option value="30d">Letzte 30 Tage</option>
-              <option value="90d">Letzte 90 Tage (3 Monate)</option>
-              <option value="6m">Letzte 6 Monate</option>
-              <option value="1y" selected>Letztes Jahr (12 Monate)</option>
-              <option value="2y">Letzte 2 Jahre</option>
-              <option value="custom">Benutzerdefiniert (Schieberegler)</option>
+            <label class="control-label" for="filter-time-preset" data-i18n="filter_time">{t['filter_time']}</label>
+            <select id="filter-time-preset" class="select-input" aria-label="{t['filter_time']}">
+              <option value="all">{t['preset_all']}</option>
+              <option value="30d">{t['preset_30d']}</option>
+              <option value="90d">{t['preset_90d']}</option>
+              <option value="6m">{t['preset_6m']}</option>
+              <option value="1y" selected>{t['preset_1y']}</option>
+              <option value="2y">{t['preset_2y']}</option>
+              <option value="custom">{t['preset_custom']}</option>
             </select>
           </div>
         </div>
@@ -872,9 +1130,9 @@ def generate_static_html(national_data, states_data, sites_index, root_dir="."):
         <!-- Row 2: Geographic & Metric Filters -->
         <div class="controls-row">
           <div class="control-group">
-            <label class="control-label" for="filter-state">Bundesland:</label>
-            <select id="filter-state" class="select-input" aria-label="Bundesland filtern">
-              <option value="ALL" selected>Deutschlandweit (Gesamt)</option>
+            <label class="control-label" for="filter-state" data-i18n="filter_state">{t['filter_state']}</label>
+            <select id="filter-state" class="select-input" aria-label="{t['filter_state']}">
+              <option value="ALL" selected>{t['all_states']}</option>
               <option value="BW">Baden-Württemberg (BW)</option>
               <option value="BY">Bayern (BY)</option>
               <option value="BE">Berlin (BE)</option>
@@ -895,25 +1153,25 @@ def generate_static_html(national_data, states_data, sites_index, root_dir="."):
           </div>
 
           <div class="control-group">
-            <label class="control-label" for="filter-site">Klärwerk (Standort):</label>
-            <select id="filter-site" class="select-input select-searchable" aria-label="Einzelstandort auswählen">
-              <option value="ALL" selected>Alle Standorte (Aggregiert)</option>
+            <label class="control-label" for="filter-site" data-i18n="filter_site">{t['filter_site']}</label>
+            <select id="filter-site" class="select-input select-searchable" aria-label="{t['filter_site']}">
+              <option value="ALL" selected>{t['all_sites']}</option>
             </select>
           </div>
 
           <div class="control-group">
-            <label class="control-label" for="filter-metric">Messwert:</label>
-            <select id="filter-metric" class="select-input" aria-label="Messwert Metrik">
-              <option value="pred" selected>GAM-Regression (Glättung + 95% KI)</option>
-              <option value="norm">Durchfluss-normalisierte Viruslast</option>
-              <option value="raw">Gemessene Viruslast (Rohwert)</option>
+            <label class="control-label" for="filter-metric" data-i18n="filter_metric">{t['filter_metric']}</label>
+            <select id="filter-metric" class="select-input" aria-label="{t['filter_metric']}">
+              <option value="pred" selected>{t['metric_pred']}</option>
+              <option value="norm">{t['metric_norm']}</option>
+              <option value="raw">{t['metric_raw']}</option>
             </select>
           </div>
 
           <div class="control-group export-group">
-            <button id="btn-export-csv" class="btn btn-outline btn-sm" title="Aktuell gefilterte Daten als CSV herunterladen">💾 CSV Export</button>
-            <button id="btn-export-svg" class="btn btn-outline btn-sm" title="Grafik als SVG Vektorgrafik speichern">📊 SVG Export</button>
-            <button id="btn-reset-filters" class="btn btn-ghost btn-sm" title="Filter zurücksetzen">↺ Reset</button>
+            <button id="btn-export-csv" class="btn btn-outline btn-sm" title="{t['export_csv']}" data-i18n="export_csv">{t['export_csv']}</button>
+            <button id="btn-export-svg" class="btn btn-outline btn-sm" title="{t['export_svg']}" data-i18n="export_svg">{t['export_svg']}</button>
+            <button id="btn-reset-filters" class="btn btn-ghost btn-sm" title="{t['reset_filters']}" data-i18n="reset_filters">{t['reset_filters']}</button>
           </div>
         </div>
 
@@ -921,20 +1179,20 @@ def generate_static_html(national_data, states_data, sites_index, root_dir="."):
         <div class="timeline-slicer" id="timeline-slicer-container">
           <div class="slicer-header">
             <div class="slicer-presets">
-              <span class="control-label">Zeitfenster Schieberegler:</span>
+              <span class="control-label" data-i18n="slider_label">{t['slider_label']}</span>
             </div>
             <div class="slicer-labels">
-              <span class="slicer-date-badge"><span class="badge-label">Von:</span> <strong id="slicer-label-start">—</strong></span>
+              <span class="slicer-date-badge"><span class="badge-label" data-i18n="slider_from">{t['slider_from']}</span> <strong id="slicer-label-start">—</strong></span>
               <span class="slicer-arrow">→</span>
-              <span class="slicer-date-badge"><span class="badge-label">Bis:</span> <strong id="slicer-label-end">—</strong></span>
+              <span class="slicer-date-badge"><span class="badge-label" data-i18n="slider_to">{t['slider_to']}</span> <strong id="slicer-label-end">—</strong></span>
               <span class="slicer-span-text text-muted" id="slicer-span-days"></span>
             </div>
           </div>
           <div class="dual-slider-wrapper">
             <div class="dual-slider-track"></div>
             <div class="dual-slider-highlight" id="slider-highlight"></div>
-            <input type="range" id="slider-start" class="range-input" min="0" max="100" value="70" step="1" aria-label="Startdatum eingrenzen">
-            <input type="range" id="slider-end" class="range-input" min="0" max="100" value="100" step="1" aria-label="Enddatum eingrenzen">
+            <input type="range" id="slider-start" class="range-input" min="0" max="100" value="70" step="1" aria-label="Start date">
+            <input type="range" id="slider-end" class="range-input" min="0" max="100" value="100" step="1" aria-label="End date">
           </div>
         </div>
 
@@ -952,35 +1210,35 @@ def generate_static_html(national_data, states_data, sites_index, root_dir="."):
       <!-- NO-JAVASCRIPT FALLBACK VIEW: Fully Pre-rendered Visualizations -->
       <noscript>
         <div class="no-js-banner alert alert-info">
-          <strong>Hinweis:</strong> Sie betrachten die statische barrierefreie Version des Dashboards (ohne JavaScript). Alle bundesweiten Daten, Grafiken und Tabellen sind vollständig geladen und lesbar.
+          <strong>{t['no_js_note']}</strong>
         </div>
         
         <div class="no-js-tabs">
           <details open class="chart-details">
-            <summary class="chart-summary"><strong>📊 Grafik: Lineare Skala (Genkopien / Liter)</strong></summary>
+            <summary class="chart-summary"><strong>📊 {t['chart_scale_linear']}</strong></summary>
             <div class="static-svg-wrapper">
               {svg_linear}
             </div>
-            <p class="text-muted"><small>Lineare Skala zeigt die absolute physikalische Viruslast im Abwasser.</small></p>
+            <p class="text-muted"><small>{t['desc_linear']}</small></p>
           </details>
 
           <details class="chart-details">
-            <summary class="chart-summary"><strong>📈 Grafik: Logarithmische Skala (Log₁₀)</strong></summary>
+            <summary class="chart-summary"><strong>📈 {t['chart_scale_log']}</strong></summary>
             <div class="static-svg-wrapper">
               {svg_log}
             </div>
-            <p class="text-muted"><small>Logarithmische Skala verdeutlicht Vervielfachungsraten und exponentielle Dynamik bei niedrigen und hohen Werten gleichermaßen.</small></p>
+            <p class="text-muted"><small>{t['desc_log']}</small></p>
           </details>
         </div>
       </noscript>
 
       <!-- Chart Metadata & Caption -->
       <div class="chart-caption">
-        <p><strong>Erklärung:</strong> Die durchgezogene Linie repräsentiert den GAM-Regressionswert (generalisiertes additives Modell mit adaptiver Glättung). Das schattierte Band stellt das punktweise 95%-Konfidenzintervall dar. Alle Angaben in Genkopien pro Liter Abwasser.</p>
+        <p data-i18n="chart_expl">{t['chart_expl']}</p>
         <div class="chart-links">
-          <a href="assets/national_chart_linear.svg" download="amelag_linear_deutschland.svg" class="btn-link">SVG (Linear) herunterladen</a> • 
-          <a href="assets/national_chart_log.svg" download="amelag_log_deutschland.svg" class="btn-link">SVG (Logarithmisch) herunterladen</a> •
-          <a href="data/national.json" download="national.json" class="btn-link">JSON-Rohdaten</a>
+          <a href="{assets_prefix}national_chart_linear.svg" download="amelag_linear_{lang}.svg" class="btn-link">{t['download_svg_lin']}</a> • 
+          <a href="{assets_prefix}national_chart_log.svg" download="amelag_log_{lang}.svg" class="btn-link">{t['download_svg_log']}</a> •
+          <a href="{data_prefix}national.json" download="national.json" class="btn-link">{t['download_json']}</a>
         </div>
       </div>
     </section>
@@ -989,20 +1247,20 @@ def generate_static_html(national_data, states_data, sites_index, root_dir="."):
     <div class="dashboard-grid">
       
       <!-- Bundesländer Comparison Table -->
-      <section class="card" aria-label="Bundesländer Übersicht">
+      <section class="card" aria-label="{t['states_overview']}">
         <div class="card-header">
-          <h2 class="card-title">Bundesländer Übersicht</h2>
-          <span class="card-subtitle">SARS-CoV-2 Viruslast &amp; 7-Tage-Trend nach Bundesland</span>
+          <h2 class="card-title" data-i18n="states_overview">{t['states_overview']}</h2>
+          <span class="card-subtitle" data-i18n="states_sub">{t['states_sub']}</span>
         </div>
         <div class="table-container">
           <table class="data-table" id="states-table">
             <thead>
               <tr>
-                <th scope="col">Bundesland</th>
-                <th scope="col" class="text-right">Kläranlagen</th>
-                <th scope="col" class="text-right">Bevölkerung</th>
-                <th scope="col" class="text-right">SARS-CoV-2</th>
-                <th scope="col" class="text-center">Trend (7d)</th>
+                <th scope="col" data-i18n="th_state">{t['th_state']}</th>
+                <th scope="col" class="text-right" data-i18n="th_plants">{t['th_plants']}</th>
+                <th scope="col" class="text-right" data-i18n="th_population">{t['th_population']}</th>
+                <th scope="col" class="text-right" data-i18n="th_sars">{t['th_sars']}</th>
+                <th scope="col" class="text-center" data-i18n="th_trend">{t['th_trend']}</th>
               </tr>
             </thead>
             <tbody>
@@ -1013,20 +1271,20 @@ def generate_static_html(national_data, states_data, sites_index, root_dir="."):
       </section>
 
       <!-- Pathogen Comparison Table -->
-      <section class="card" aria-label="Erreger-Vergleich">
+      <section class="card" aria-label="{t['pathogen_comp']}">
         <div class="card-header">
-          <h2 class="card-title">Erreger-Vergleich (Deutschlandweit)</h2>
-          <span class="card-subtitle">Aktuelle Werte im Vergleich zu historischen Höchstständen</span>
+          <h2 class="card-title" data-i18n="pathogen_comp">{t['pathogen_comp']}</h2>
+          <span class="card-subtitle" data-i18n="pathogen_comp_sub">{t['pathogen_comp_sub']}</span>
         </div>
         <div class="table-container">
           <table class="data-table" id="pathogen-table">
             <thead>
               <tr>
-                <th scope="col">Erreger</th>
-                <th scope="col" class="text-right">Aktuell (Kopien/L)</th>
-                <th scope="col" class="text-center">Trend (7d)</th>
-                <th scope="col" class="text-right">Klärwerke (Abdeckung)</th>
-                <th scope="col" class="text-right">Historischer Peak</th>
+                <th scope="col" data-i18n="th_pathogen">{t['th_pathogen']}</th>
+                <th scope="col" class="text-right" data-i18n="th_current_val">{t['th_current_val']}</th>
+                <th scope="col" class="text-center" data-i18n="th_trend">{t['th_trend']}</th>
+                <th scope="col" class="text-right" data-i18n="th_sites_cov">{t['th_sites_cov']}</th>
+                <th scope="col" class="text-right" data-i18n="th_hist_peak">{t['th_hist_peak']}</th>
               </tr>
             </thead>
             <tbody>
@@ -1039,22 +1297,22 @@ def generate_static_html(national_data, states_data, sites_index, root_dir="."):
     </div>
 
     <!-- Methodology & Data Notes -->
-    <section class="card info-card" aria-label="Methodik und Datenquelle">
-      <h2 class="card-title">Über den AMELAG-Datensatz &amp; Methodik</h2>
+    <section class="card info-card" aria-label="{t['method_heading']}">
+      <h2 class="card-title" data-i18n="method_heading">{t['method_heading']}</h2>
       <div class="info-content">
-        <p>Das Projekt <strong>AMELAG</strong> (<em>Abwassersurveillance zur epidemiologischen Lageerfassung</em>) ist eine gemeinsame Initiative des <strong>Robert Koch-Instituts (RKI)</strong> und des <strong>Umweltbundesamts (UBA)</strong>. Seit Februar 2022 wird in einem bundesweiten Verbund aus Kläranlagen, Laboren und Fachbehörden die Konzentration von Krankheitserregern im Rohabwasser fortlaufend überwacht.</p>
+        <p data-i18n="method_intro">{t['method_intro']}</p>
         
-        <h3>Warum lineare und logarithmische Darstellung?</h3>
+        <h3 data-i18n="why_scales_heading">{t['why_scales_heading']}</h3>
         <ul>
-          <li><strong>Lineare Skala:</strong> Zeigt die tatsächliche physikalische Konzentration der Viren im Abwasser. Dies verdeutlicht das absolute Ausmaß großer Infektionswellen im Vergleich zu ruhigen Sommerphasen.</li>
-          <li><strong>Logarithmische Skala (Log₁₀):</strong> Da sich Viren in der Anfangsphase einer Welle exponentiell vermehren, entspricht eine exponentielle Zunahme auf der logarithmischen Achse einer Geraden. Dies erlaubt die frühe Erkennung von Trendwechseln und den gleichzeitigen Vergleich von Erregern mit unterschiedlichen Grundlasten (z. B. SARS-CoV-2 vs. RSV).</li>
+          <li data-i18n="why_scales_li1">{t['why_scales_li1']}</li>
+          <li data-i18n="why_scales_li2">{t['why_scales_li2']}</li>
         </ul>
 
-        <h3>Normalisierung und GAM-Modellierung</h3>
-        <p>Um Schwankungen durch Niederschläge, Schmelzwasser oder gewerbliche Einleitungen auszugleichen, wird die gemessene Viruslast über den Abwasserdurchfluss der Kläranlage normalisiert. Anschließend wird eine GAM-Regression (Generalized Additive Model) mit adaptiver Spline-Glättung berechnet, um den übergeordneten epidemiologischen Trend robuster gegenüber einzelnen Messtoleranzen abzubilden.</p>
+        <h3 data-i18n="norm_gam_heading">{t['norm_gam_heading']}</h3>
+        <p data-i18n="norm_gam_p">{t['norm_gam_p']}</p>
         
         <div class="license-box">
-          <p><strong>Datenlizenz:</strong> Die Rohdaten stehen unter der Lizenz <a href="https://creativecommons.org/licenses/by/4.0/deed.de" target="_blank" rel="noopener noreferrer">Creative Commons Namensnennung 4.0 International (CC BY 4.0)</a> bzw. Datenlizenz Deutschland – Namensnennung – Version 2.0. Quelle: Robert Koch-Institut (RKI) &amp; Umweltbundesamt (UBA), Zenodo Datensatz AMELAG.</p>
+          <p data-i18n="license_text">{t['license_text']}</p>
         </div>
       </div>
     </section>
@@ -1064,27 +1322,51 @@ def generate_static_html(national_data, states_data, sites_index, root_dir="."):
   <!-- Footer -->
   <footer class="app-footer" role="contentinfo">
     <div class="container footer-container">
-      <p>AMELAG Abwassermonitor • Statische Webapplikation für GitHub Pages • Entwickelt mit barrierefreiem Fallback für Low-Performance &amp; Terminal-Browser.</p>
+      <p data-i18n="footer_text">{t['footer_text']}</p>
       <p class="footer-links">
-        <a href="https://github.com/robert-koch-institut/Abwassersurveillance_AMELAG" target="_blank" rel="noopener noreferrer">Original RKI Repository</a> •
-        <a href="https://www.rki.de/DE/Content/InfAZ/A/Abwassersurveillance/abwassersurveillance_node.html" target="_blank" rel="noopener noreferrer">RKI Fachinformation</a> •
-        <a href="https://www.umweltbundesamt.de/" target="_blank" rel="noopener noreferrer">Umweltbundesamt</a>
+        <a href="https://github.com/robert-koch-institut/Abwassersurveillance_AMELAG" target="_blank" rel="noopener noreferrer" data-i18n="footer_orig">{t['footer_orig']}</a> •
+        <a href="https://www.rki.de/DE/Content/InfAZ/A/Abwassersurveillance/abwassersurveillance_node.html" target="_blank" rel="noopener noreferrer" data-i18n="footer_info">{t['footer_info']}</a> •
+        <a href="https://www.umweltbundesamt.de/" target="_blank" rel="noopener noreferrer" data-i18n="footer_uba">{t['footer_uba']}</a>
       </p>
     </div>
   </footer>
 
   <!-- SPA Hydration Script -->
-  <script src="js/dashboard.js"></script>
+  <script src="{js_path}"></script>
 </body>
 </html>
 """
 
-    with open(os.path.join(root_dir, "index.html"), "w", encoding="utf-8") as f:
+    out_file = os.path.join(root_dir, filename)
+    os.makedirs(os.path.dirname(out_file), exist_ok=True)
+    with open(out_file, "w", encoding="utf-8") as f:
         f.write(html_content)
-    print("index.html successfully written with pre-rendered data and charts.")
+    print(f"{filename} successfully written in [{lang.upper()}].")
 
 if __name__ == "__main__":
     import sys
     root = sys.argv[1] if len(sys.argv) > 1 else "."
     nat, states, sites = build_data(root)
-    generate_static_html(nat, states, sites, root)
+
+    # 1. Standalone SVG Assets (both DE and EN)
+    assets_dir = os.path.join(root, "assets")
+    os.makedirs(assets_dir, exist_ok=True)
+    with open(os.path.join(assets_dir, "national_chart_linear.svg"), "w", encoding="utf-8") as f:
+        f.write(generate_svg_chart(nat, scale="linear", width=980, height=480, lang="de"))
+    with open(os.path.join(assets_dir, "national_chart_log.svg"), "w", encoding="utf-8") as f:
+        f.write(generate_svg_chart(nat, scale="log", width=980, height=480, lang="de"))
+    with open(os.path.join(assets_dir, "national_chart_linear_en.svg"), "w", encoding="utf-8") as f:
+        f.write(generate_svg_chart(nat, scale="linear", width=980, height=480, lang="en"))
+    with open(os.path.join(assets_dir, "national_chart_log_en.svg"), "w", encoding="utf-8") as f:
+        f.write(generate_svg_chart(nat, scale="log", width=980, height=480, lang="en"))
+
+    # 2. Multi-page pre-rendering: German default (index.html)
+    generate_static_html(nat, states, sites, root_dir=root, lang="de", filename="index.html", path_prefix="")
+
+    # 3. Multi-page pre-rendering: English version (en.html in root)
+    generate_static_html(nat, states, sites, root_dir=root, lang="en", filename="en.html", path_prefix="")
+
+    # 4. Multi-page pre-rendering: English version (en/index.html with ../ path prefix)
+    generate_static_html(nat, states, sites, root_dir=root, lang="en", filename="en/index.html", path_prefix="../")
+
+    print("Static build finished: index.html (DE), en.html (EN), en/index.html (EN) generated!")
