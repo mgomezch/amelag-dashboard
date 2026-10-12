@@ -1,0 +1,13 @@
+# Python cache
+__pycache__/
+*.py[cod]
+
+# Raw large individual sites TSV (downloaded on demand / in CI)
+amelag_einzelstandorte.tsv
+
+# Test screenshots
+test_screenshots/
+
+# System / OS
+.DS_Store
+Thumbs.db
