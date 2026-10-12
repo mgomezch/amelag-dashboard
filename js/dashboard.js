@@ -1115,17 +1115,20 @@
       const scaleX = (svgEl.viewBox.baseVal.width || rect.width) / rect.width;
       const svgX = mouseX * scaleX;
 
-      if (svgX < margin.left || svgX > margin.left + plotW) {
+      // Allow a margin buffer for comfortable edge tapping on touchscreens
+      if (svgX < margin.left - 40 || svgX > margin.left + plotW + 40) {
         hideTooltip();
         return;
       }
+
+      const clampedSvgX = Math.max(margin.left, Math.min(margin.left + plotW, svgX));
 
       let closestPt = null;
       let minDistance = Infinity;
 
       points.forEach(pt => {
         const ptX = getX(pt[0]);
-        const dist = Math.abs(ptX - svgX);
+        const dist = Math.abs(ptX - clampedSvgX);
         if (dist < minDistance) {
           minDistance = dist;
           closestPt = pt;
@@ -1185,8 +1188,43 @@
 
       DOM.chartTooltip.innerHTML = tooltipContent;
       DOM.chartTooltip.classList.add('visible');
-      DOM.chartTooltip.style.left = `${(ptX / (svgEl.viewBox.baseVal.width || rect.width)) * rect.width}px`;
-      DOM.chartTooltip.style.top = `${(ptY / (svgEl.viewBox.baseVal.height || rect.height)) * rect.height}px`;
+
+      // Calculate anchor point in pixels relative to DOM.chartViewport
+      const vpRect = DOM.chartViewport.getBoundingClientRect();
+      const svgViewW = svgEl.viewBox.baseVal.width || rect.width;
+      const svgViewH = svgEl.viewBox.baseVal.height || rect.height;
+      const anchorX = (ptX / svgViewW) * rect.width + (rect.left - vpRect.left);
+      const anchorY = (ptY / svgViewH) * rect.height + (rect.top - vpRect.top);
+
+      // Measure tooltip dimensions for boundary clamping
+      const tooltipW = DOM.chartTooltip.offsetWidth;
+      const tooltipH = DOM.chartTooltip.offsetHeight;
+      const vpW = DOM.chartViewport.clientWidth;
+      const vpH = DOM.chartViewport.clientHeight;
+
+      const pad = 8; // Margin from viewport boundaries
+
+      // Horizontal Clamping: Center on anchorX, clamped within [pad, vpW - pad - tooltipW]
+      let left = anchorX - tooltipW / 2;
+      if (left + tooltipW > vpW - pad) {
+        left = vpW - pad - tooltipW;
+      }
+      if (left < pad) {
+        left = pad;
+      }
+
+      // Vertical Clamping: Default to above anchor point; if too close to top, flip below
+      let top = anchorY - tooltipH - 12;
+      if (top < pad) {
+        top = anchorY + 14;
+      }
+      if (top + tooltipH > vpH - pad) {
+        top = Math.max(pad, vpH - pad - tooltipH);
+      }
+
+      DOM.chartTooltip.style.left = `${Math.round(left)}px`;
+      DOM.chartTooltip.style.top = `${Math.round(top)}px`;
+      DOM.chartTooltip.style.transform = 'none';
     }
 
     function hideTooltip() {
@@ -1199,9 +1237,9 @@
 
     svgEl.addEventListener('mousemove', handlePointer);
     svgEl.addEventListener('mouseleave', hideTooltip);
+    svgEl.addEventListener('click', handlePointer);
     svgEl.addEventListener('touchstart', handlePointer, { passive: true });
     svgEl.addEventListener('touchmove', handlePointer, { passive: true });
-    svgEl.addEventListener('touchend', hideTooltip);
   }
 
   // Export Data as CSV
@@ -1526,6 +1564,19 @@
       resizeTimer = setTimeout(() => {
         renderChart();
       }, 150);
+    });
+
+    // Dismiss tooltip on outside tap / click
+    document.addEventListener('pointerdown', e => {
+      if (DOM.chartTooltip && DOM.chartViewport && !DOM.chartViewport.contains(e.target)) {
+        DOM.chartTooltip.classList.remove('visible');
+        const crosshair = DOM.chartContainer?.querySelector('#interactive-crosshair');
+        const dot = DOM.chartContainer?.querySelector('#interactive-dot');
+        crosshair?.setAttribute('x1', '-10');
+        crosshair?.setAttribute('x2', '-10');
+        dot?.setAttribute('cx', '-10');
+        dot?.setAttribute('cy', '-10');
+      }
     });
   }
 

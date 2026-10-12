@@ -657,19 +657,20 @@ body {
   border: 1px solid var(--border-color);
   box-shadow: var(--shadow-lg);
   border-radius: var(--radius-md);
-  padding: 0.75rem;
+  padding: 0.65rem 0.8rem;
   font-size: 0.8rem;
   z-index: 100;
   opacity: 0;
-  transform: translate(-50%, -105%);
   transition: opacity 100ms ease;
-  white-space: nowrap;
+  max-width: calc(100% - 16px);
+  box-sizing: border-box;
 }
 
 .chart-tooltip.visible {
   opacity: 1;
 }
 
+.tooltip-title,
 .tooltip-date {
   font-weight: 700;
   margin-bottom: 0.35rem;
@@ -683,6 +684,7 @@ body {
   justify-content: space-between;
   gap: 0.75rem;
   margin-top: 0.2rem;
+  flex-wrap: wrap;
 }
 
 .tooltip-swatch {
@@ -1166,6 +1168,11 @@ body {
 
   .card {
     padding: 1rem 0.75rem;
+  }
+
+  .chart-tooltip {
+    padding: 0.5rem 0.65rem;
+    font-size: 0.75rem;
   }
 
   .table-container {
