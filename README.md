@@ -1,6 +1,6 @@
 # 🦠 AMELAG Abwassermonitor Deutschland
 
-[![Deploy Static Dashboard to GitHub Pages](https://github.com/robert-koch-institut/Abwassersurveillance_AMELAG/actions/workflows/deploy.yml/badge.svg)](https://github.com/robert-koch-institut/Abwassersurveillance_AMELAG/actions)
+[![Deploy Static Dashboard to GitHub Pages](https://github.com/mgomezch/amelag-dashboard/actions/workflows/deploy.yml/badge.svg)](https://github.com/mgomezch/amelag-dashboard/actions)
 [![License: CC BY 4.0](https://img.shields.io/badge/License-CC_BY_4.0-blue.svg)](https://creativecommons.org/licenses/by/4.0/deed.de)
 [![Accessibility: Lynx & Links Verified](https://img.shields.io/badge/Accessibility-No--JS%20%26%20Terminal%20Ready-success.svg)](#barrierefreiheit--terminal-browser)
 
@@ -29,7 +29,10 @@ aus **169 Kläranlagen** in allen **16 deutschen Bundesländern**, die über **3
   - Deutschlandweit (Gesamtüberblick)
   - 16 Bundesländer (mit bevölkerungsgewichteten Trends)
   - 169 Einzelklärwerke (z. B. Berlin-Ruhleben, Köln-Stammheim, München-Großlappen, Hamburg, Frankfurt-Niederrad etc.)
-- **Zeitbereich-Auswahl:** Gesamtzeitraum (2022–2026), 2 Jahre, 1 Jahr, 6 Monate, 90 Tage.
+- **Temporales Slicing & Doppel-Schieberegler:**
+  - Schnell-Auswahl über Preset-Dropdown: *Gesamtzeitraum (2022–heute)*, *Letzte 30 Tage*, *Letzte 90 Tage*, *Letzte 6 Monate*, *Letztes Jahr (12 Monate)*, *Letzte 2 Jahre*.
+  - Synchronisierter Doppel-Schieberegler (Dual-Handle Slider) für beliebige zeitliche Teilabschnitte mit dynamischer Neuberechnung lokaler Peaks und Kennzahlen.
+  - Deep-Linking & URL-State-Hash (`#p=sars-cov-2&s=log&t=6m&from=...&to=...`).
 - **Metrik-Auswahl:** GAM-Spline-Regression (adaptive Glättung mit 95%-Konfidenzintervall), durchfluss-normalisierte Viruslast oder Rohmesswerte.
 - **Daten- & Grafik-Export:** 1-Klick-Export der aktuell gefilterten Daten als CSV oder als Vektorgrafik (SVG).
 
