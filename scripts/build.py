@@ -86,6 +86,31 @@ def build_data(root_dir="."):
     sites_dir = os.path.join(data_dir, "sites")
     os.makedirs(sites_dir, exist_ok=True)
 
+    if not os.path.exists(sites_file):
+        national_json = os.path.join(data_dir, "national.json")
+        states_json = os.path.join(data_dir, "states_summary.json")
+        sites_json = os.path.join(data_dir, "sites_index.json")
+        if os.path.exists(national_json) and os.path.exists(states_json) and os.path.exists(sites_json):
+            print("--- Reusing pre-generated JSON datasets (sites TSV not present) ---")
+            with open(national_json, "r", encoding="utf-8") as f:
+                national_data = json.load(f)
+            with open(states_json, "r", encoding="utf-8") as f:
+                states_summary = json.load(f)
+            with open(sites_json, "r", encoding="utf-8") as f:
+                sites_index = json.load(f)
+            return national_data, states_summary, sites_index
+        else:
+            print("Downloading amelag_einzelstandorte.tsv from RKI...")
+            import urllib.request
+            url = "https://raw.githubusercontent.com/robert-koch-institut/Abwassersurveillance_AMELAG/main/amelag_einzelstandorte.tsv"
+            urllib.request.urlretrieve(url, sites_file)
+
+    if not os.path.exists(agg_file):
+        print("Downloading amelag_aggregierte_kurve.tsv from RKI...")
+        import urllib.request
+        url = "https://raw.githubusercontent.com/robert-koch-institut/Abwassersurveillance_AMELAG/main/amelag_aggregierte_kurve.tsv"
+        urllib.request.urlretrieve(url, agg_file)
+
     print("--- 1. Processing National Aggregated Data ---")
     national_series = defaultdict(list)
     with open(agg_file, "r", encoding="utf-8") as f:
