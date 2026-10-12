@@ -31,11 +31,16 @@
   // Application State
   const AppState = {
     pathogen: 'SARS-CoV-2',
-    scale: 'linear',      // 'linear' | 'log'
-    timeRange: '1y',      // 'all' | '2y' | '1y' | '6m' | '90d'
-    state: 'ALL',         // 'ALL' | state code (e.g. 'BY')
-    site: 'ALL',          // 'ALL' | site slug (e.g. 'aachen')
-    metric: 'pred',       // 'pred' | 'norm' | 'raw'
+    scale: 'linear',        // 'linear' | 'log'
+    timePreset: '1y',       // 'all' | '30d' | '90d' | '6m' | '1y' | '2y' | 'custom'
+    startDate: null,        // 'YYYY-MM-DD'
+    endDate: null,          // 'YYYY-MM-DD'
+    globalMinDate: null,    // Earliest date in data
+    globalMaxDate: null,    // Latest date in data
+    totalDays: 0,
+    state: 'ALL',           // 'ALL' | state code (e.g. 'BY')
+    site: 'ALL',            // 'ALL' | site slug (e.g. 'aachen')
+    metric: 'pred',         // 'pred' | 'norm' | 'raw'
     data: {
       national: null,
       sitesIndex: null,
@@ -50,7 +55,13 @@
     filterPathogen: document.getElementById('filter-pathogen'),
     btnScaleLinear: document.getElementById('btn-scale-linear'),
     btnScaleLog: document.getElementById('btn-scale-log'),
-    timeButtons: document.querySelectorAll('.btn-time'),
+    filterTimePreset: document.getElementById('filter-time-preset'),
+    sliderStart: document.getElementById('slider-start'),
+    sliderEnd: document.getElementById('slider-end'),
+    sliderHighlight: document.getElementById('slider-highlight'),
+    slicerLabelStart: document.getElementById('slicer-label-start'),
+    slicerLabelEnd: document.getElementById('slicer-label-end'),
+    slicerSpanDays: document.getElementById('slicer-span-days'),
     filterState: document.getElementById('filter-state'),
     filterSite: document.getElementById('filter-site'),
     filterMetric: document.getElementById('filter-metric'),
@@ -114,7 +125,9 @@
     const params = new URLSearchParams();
     if (AppState.pathogen !== 'SARS-CoV-2') params.set('p', AppState.pathogen);
     if (AppState.scale !== 'linear') params.set('s', AppState.scale);
-    if (AppState.timeRange !== '1y') params.set('t', AppState.timeRange);
+    if (AppState.timePreset !== '1y') params.set('t', AppState.timePreset);
+    if (AppState.startDate && AppState.timePreset === 'custom') params.set('from', AppState.startDate);
+    if (AppState.endDate && AppState.timePreset === 'custom') params.set('to', AppState.endDate);
     if (AppState.state !== 'ALL') params.set('bl', AppState.state);
     if (AppState.site !== 'ALL') params.set('site', AppState.site);
     if (AppState.metric !== 'pred') params.set('m', AppState.metric);
@@ -127,7 +140,9 @@
     const params = new URLSearchParams(window.location.hash.substring(1));
     if (params.has('p')) AppState.pathogen = params.get('p');
     if (params.has('s')) AppState.scale = params.get('s');
-    if (params.has('t')) AppState.timeRange = params.get('t');
+    if (params.has('t')) AppState.timePreset = params.get('t');
+    if (params.has('from')) AppState.startDate = params.get('from');
+    if (params.has('to')) AppState.endDate = params.get('to');
     if (params.has('bl')) AppState.state = params.get('bl');
     if (params.has('site')) AppState.site = params.get('site');
     if (params.has('m')) AppState.metric = params.get('m');
@@ -148,6 +163,116 @@
     });
   }
 
+  // Slicer Functions
+  function dateToDays(dateStr) {
+    if (!AppState.globalMinDate || !dateStr) return 0;
+    const dMin = new Date(AppState.globalMinDate);
+    const d = new Date(dateStr);
+    return Math.max(0, Math.round((d.getTime() - dMin.getTime()) / 86400000));
+  }
+
+  function daysToDateStr(days) {
+    if (!AppState.globalMinDate) return '';
+    const dMin = new Date(AppState.globalMinDate);
+    const d = new Date(dMin.getTime() + days * 86400000);
+    return d.toISOString().substring(0, 10);
+  }
+
+  function updateSlicerUI() {
+    if (!DOM.sliderStart || !DOM.sliderEnd || AppState.totalDays <= 0) return;
+    const startVal = Number(DOM.sliderStart.value);
+    const endVal = Number(DOM.sliderEnd.value);
+
+    // Update highlight bar
+    if (DOM.sliderHighlight) {
+      const leftPct = (startVal / AppState.totalDays) * 100;
+      const widthPct = ((endVal - startVal) / AppState.totalDays) * 100;
+      DOM.sliderHighlight.style.left = `${leftPct}%`;
+      DOM.sliderHighlight.style.width = `${widthPct}%`;
+    }
+
+    // Update date badges
+    if (DOM.slicerLabelStart) {
+      DOM.slicerLabelStart.textContent = formatDateDE(AppState.startDate);
+    }
+    if (DOM.slicerLabelEnd) {
+      DOM.slicerLabelEnd.textContent = formatDateDE(AppState.endDate);
+    }
+    if (DOM.slicerSpanDays) {
+      const diffDays = Math.max(endVal - startVal, 1);
+      DOM.slicerSpanDays.textContent = `(${diffDays} Tage)`;
+    }
+    if (DOM.filterTimePreset) {
+      DOM.filterTimePreset.value = AppState.timePreset;
+    }
+  }
+
+  function applyTimePreset(preset, triggerRender = true) {
+    AppState.timePreset = preset;
+    const total = AppState.totalDays;
+    let startDays = 0;
+    let endDays = total;
+
+    if (preset === '30d') {
+      startDays = Math.max(0, total - 30);
+    } else if (preset === '90d') {
+      startDays = Math.max(0, total - 90);
+    } else if (preset === '6m') {
+      startDays = Math.max(0, total - 182);
+    } else if (preset === '1y') {
+      startDays = Math.max(0, total - 365);
+    } else if (preset === '2y') {
+      startDays = Math.max(0, total - 730);
+    } else if (preset === 'all') {
+      startDays = 0;
+      endDays = total;
+    }
+
+    if (DOM.sliderStart && DOM.sliderEnd) {
+      DOM.sliderStart.value = startDays;
+      DOM.sliderEnd.value = endDays;
+    }
+
+    AppState.startDate = daysToDateStr(startDays);
+    AppState.endDate = daysToDateStr(endDays);
+
+    updateSlicerUI();
+
+    if (triggerRender) {
+      renderChart();
+      syncStateToURL();
+    }
+  }
+
+  function initTimelineSlicer() {
+    if (!AppState.data.national) return;
+    const sars = AppState.data.national.series['SARS-CoV-2'] || [];
+    if (sars.length === 0) return;
+
+    AppState.globalMinDate = sars[0][0];
+    AppState.globalMaxDate = sars[sars.length - 1][0];
+
+    const dMin = new Date(AppState.globalMinDate);
+    const dMax = new Date(AppState.globalMaxDate);
+    AppState.totalDays = Math.max(Math.round((dMax - dMin) / 86400000), 1);
+
+    if (DOM.sliderStart && DOM.sliderEnd) {
+      DOM.sliderStart.min = 0;
+      DOM.sliderStart.max = AppState.totalDays;
+      DOM.sliderEnd.min = 0;
+      DOM.sliderEnd.max = AppState.totalDays;
+
+      if (AppState.startDate && AppState.endDate) {
+        DOM.sliderStart.value = dateToDays(AppState.startDate);
+        DOM.sliderEnd.value = dateToDays(AppState.endDate);
+        AppState.timePreset = 'custom';
+        updateSlicerUI();
+      } else {
+        applyTimePreset(AppState.timePreset, false);
+      }
+    }
+  }
+
   // Data Loading
   async function loadInitialData() {
     try {
@@ -161,6 +286,7 @@
       AppState.data.sitesIndex = sitesRes;
       AppState.data.statesSummary = statesRes;
 
+      initTimelineSlicer();
       populateSiteDropdown();
       applyStateToInputs();
       await updateActiveDataAndRender();
@@ -234,15 +360,12 @@
     if (DOM.filterState) DOM.filterState.value = AppState.state;
     if (DOM.filterSite) DOM.filterSite.value = AppState.site;
     if (DOM.filterMetric) DOM.filterMetric.value = AppState.metric;
+    if (DOM.filterTimePreset) DOM.filterTimePreset.value = AppState.timePreset;
 
     if (DOM.btnScaleLinear && DOM.btnScaleLog) {
       DOM.btnScaleLinear.classList.toggle('active', AppState.scale === 'linear');
       DOM.btnScaleLog.classList.toggle('active', AppState.scale === 'log');
     }
-
-    DOM.timeButtons.forEach(btn => {
-      btn.classList.toggle('active', btn.dataset.range === AppState.timeRange);
-    });
   }
 
   // Update Data and Re-render View
@@ -300,21 +423,12 @@
     }
   }
 
-  // Filter series data by active time range
-  function filterByTime(series, range) {
-    if (!series || series.length === 0 || range === 'all') return series;
-    const lastDateStr = series[series.length - 1][0];
-    const lastDate = new Date(lastDateStr);
-
-    let daysToSubtract = 365;
-    if (range === '2y') daysToSubtract = 730;
-    else if (range === '1y') daysToSubtract = 365;
-    else if (range === '6m') daysToSubtract = 182;
-    else if (range === '90d') daysToSubtract = 90;
-
-    const cutoffDate = new Date(lastDate.getTime() - (daysToSubtract * 86400000));
-    const cutoffStr = cutoffDate.toISOString().substring(0, 10);
-    return series.filter(pt => pt[0] >= cutoffStr);
+  // Filter series data by active temporal sub-slice [startDate, endDate]
+  function filterByTime(series) {
+    if (!series || series.length === 0) return series;
+    const start = AppState.startDate || '0000-00-00';
+    const end = AppState.endDate || '9999-99-99';
+    return series.filter(pt => pt[0] >= start && pt[0] <= end);
   }
 
   // High-performance dynamic SVG chart rendering
@@ -345,7 +459,7 @@
             if (siteData.series[p]) {
               datasetsToPlot.push({
                 pathogen: p,
-                series: filterByTime(siteData.series[p], AppState.timeRange),
+                series: filterByTime(siteData.series[p]),
                 isSite: true
               });
             }
@@ -353,7 +467,7 @@
         } else if (siteData.series[AppState.pathogen]) {
           datasetsToPlot.push({
             pathogen: AppState.pathogen,
-            series: filterByTime(siteData.series[AppState.pathogen], AppState.timeRange),
+            series: filterByTime(siteData.series[AppState.pathogen]),
             isSite: true
           });
         }
@@ -366,7 +480,7 @@
             if (stData.series[p]) {
               datasetsToPlot.push({
                 pathogen: p,
-                series: filterByTime(stData.series[p], AppState.timeRange),
+                series: filterByTime(stData.series[p]),
                 isState: true
               });
             }
@@ -374,7 +488,7 @@
         } else if (stData.series[AppState.pathogen]) {
           datasetsToPlot.push({
             pathogen: AppState.pathogen,
-            series: filterByTime(stData.series[AppState.pathogen], AppState.timeRange),
+            series: filterByTime(stData.series[AppState.pathogen]),
             isState: true
           });
         }
@@ -386,7 +500,7 @@
           if (AppState.data.national.series[p]) {
             datasetsToPlot.push({
               pathogen: p,
-              series: filterByTime(AppState.data.national.series[p], AppState.timeRange),
+              series: filterByTime(AppState.data.national.series[p]),
               isNational: true
             });
           }
@@ -395,7 +509,7 @@
         const natSeries = AppState.data.national.series[AppState.pathogen] || [];
         datasetsToPlot.push({
           pathogen: AppState.pathogen,
-          series: filterByTime(natSeries, AppState.timeRange),
+          series: filterByTime(natSeries),
           isNational: true
         });
       }
@@ -406,15 +520,17 @@
       return;
     }
 
-    // Determine Global Date Range
-    let minDateStr = '9999-99-99';
-    let maxDateStr = '0000-00-00';
-    datasetsToPlot.forEach(ds => {
-      ds.series.forEach(pt => {
-        if (pt[0] < minDateStr) minDateStr = pt[0];
-        if (pt[0] > maxDateStr) maxDateStr = pt[0];
+    // Determine Date Range for Chart X-domain
+    let minDateStr = AppState.startDate;
+    let maxDateStr = AppState.endDate;
+    if (!minDateStr || !maxDateStr) {
+      datasetsToPlot.forEach(ds => {
+        ds.series.forEach(pt => {
+          if (!minDateStr || pt[0] < minDateStr) minDateStr = pt[0];
+          if (!maxDateStr || pt[0] > maxDateStr) maxDateStr = pt[0];
+        });
       });
-    });
+    }
 
     const dStart = new Date(minDateStr);
     const dEnd = new Date(maxDateStr);
@@ -851,13 +967,36 @@
       syncStateToURL();
     });
 
-    DOM.timeButtons.forEach(btn => {
-      btn.addEventListener('click', e => {
-        AppState.timeRange = e.target.dataset.range;
-        applyStateToInputs();
-        renderChart();
-        syncStateToURL();
-      });
+    DOM.filterTimePreset?.addEventListener('change', e => {
+      applyTimePreset(e.target.value, true);
+    });
+
+    DOM.sliderStart?.addEventListener('input', e => {
+      let val = Number(e.target.value);
+      const endVal = Number(DOM.sliderEnd?.value || AppState.totalDays);
+      if (val >= endVal) {
+        val = Math.max(0, endVal - 1);
+        e.target.value = val;
+      }
+      AppState.startDate = daysToDateStr(val);
+      AppState.timePreset = 'custom';
+      updateSlicerUI();
+      renderChart();
+      syncStateToURL();
+    });
+
+    DOM.sliderEnd?.addEventListener('input', e => {
+      let val = Number(e.target.value);
+      const startVal = Number(DOM.sliderStart?.value || 0);
+      if (val <= startVal) {
+        val = Math.min(AppState.totalDays, startVal + 1);
+        e.target.value = val;
+      }
+      AppState.endDate = daysToDateStr(val);
+      AppState.timePreset = 'custom';
+      updateSlicerUI();
+      renderChart();
+      syncStateToURL();
     });
 
     DOM.filterState?.addEventListener('change', e => {
@@ -888,12 +1027,12 @@
     DOM.btnResetFilters?.addEventListener('click', () => {
       AppState.pathogen = 'SARS-CoV-2';
       AppState.scale = 'linear';
-      AppState.timeRange = '1y';
       AppState.state = 'ALL';
       AppState.site = 'ALL';
       AppState.metric = 'pred';
       populateSiteDropdown();
       applyStateToInputs();
+      applyTimePreset('1y', false);
       updateActiveDataAndRender();
     });
 

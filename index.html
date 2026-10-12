@@ -148,14 +148,16 @@
           </div>
 
           <div class="control-group">
-            <span class="control-label">Zeitraum:</span>
-            <div class="btn-group" role="group" aria-label="Zeitbereich">
-              <button type="button" class="btn btn-toggle btn-time" data-range="all">Gesamt</button>
-              <button type="button" class="btn btn-toggle btn-time" data-range="2y">2 Jahre</button>
-              <button type="button" class="btn btn-toggle btn-time active" data-range="1y">1 Jahr</button>
-              <button type="button" class="btn btn-toggle btn-time" data-range="6m">6 Mon.</button>
-              <button type="button" class="btn btn-toggle btn-time" data-range="90d">90 Tage</button>
-            </div>
+            <label class="control-label" for="filter-time-preset">Zeitraum:</label>
+            <select id="filter-time-preset" class="select-input" aria-label="Zeitraum auswählen">
+              <option value="all">Alle Daten (Gesamt 2022–heute)</option>
+              <option value="30d">Letzte 30 Tage</option>
+              <option value="90d">Letzte 90 Tage (3 Monate)</option>
+              <option value="6m">Letzte 6 Monate</option>
+              <option value="1y" selected>Letztes Jahr (12 Monate)</option>
+              <option value="2y">Letzte 2 Jahre</option>
+              <option value="custom">Benutzerdefiniert (Schieberegler)</option>
+            </select>
           </div>
         </div>
 
@@ -204,6 +206,27 @@
             <button id="btn-export-csv" class="btn btn-outline btn-sm" title="Aktuell gefilterte Daten als CSV herunterladen">💾 CSV Export</button>
             <button id="btn-export-svg" class="btn btn-outline btn-sm" title="Grafik als SVG Vektorgrafik speichern">📊 SVG Export</button>
             <button id="btn-reset-filters" class="btn btn-ghost btn-sm" title="Filter zurücksetzen">↺ Reset</button>
+          </div>
+        </div>
+
+        <!-- Row 3: Interactive Dual-Slider Temporal Slicer -->
+        <div class="timeline-slicer" id="timeline-slicer-container">
+          <div class="slicer-header">
+            <div class="slicer-presets">
+              <span class="control-label">Zeitfenster Schieberegler:</span>
+            </div>
+            <div class="slicer-labels">
+              <span class="slicer-date-badge"><span class="badge-label">Von:</span> <strong id="slicer-label-start">—</strong></span>
+              <span class="slicer-arrow">→</span>
+              <span class="slicer-date-badge"><span class="badge-label">Bis:</span> <strong id="slicer-label-end">—</strong></span>
+              <span class="slicer-span-text text-muted" id="slicer-span-days"></span>
+            </div>
+          </div>
+          <div class="dual-slider-wrapper">
+            <div class="dual-slider-track"></div>
+            <div class="dual-slider-highlight" id="slider-highlight"></div>
+            <input type="range" id="slider-start" class="range-input" min="0" max="100" value="70" step="1" aria-label="Startdatum eingrenzen">
+            <input type="range" id="slider-end" class="range-input" min="0" max="100" value="100" step="1" aria-label="Enddatum eingrenzen">
           </div>
         </div>
 
