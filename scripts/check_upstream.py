@@ -14,11 +14,36 @@ import argparse
 import os
 import subprocess
 import sys
+import time
 import urllib.request
 
 UPSTREAM_REPO = "https://github.com/robert-koch-institut/Abwassersurveillance_AMELAG.git"
 UPSTREAM_BRANCH = "refs/heads/main"
 RAW_BASE_URL = "https://raw.githubusercontent.com/robert-koch-institut/Abwassersurveillance_AMELAG/main"
+
+def download_file(url, target_path, retries=3, timeout=120):
+    """Download a file with User-Agent header, timeout, and automatic retry."""
+    req = urllib.request.Request(
+        url,
+        headers={"User-Agent": "amelag-dashboard-updater/1.0 (https://github.com/mgomezch/amelag-dashboard)"}
+    )
+    for attempt in range(1, retries + 1):
+        try:
+            temp_path = f"{target_path}.tmp"
+            with urllib.request.urlopen(req, timeout=timeout) as response, open(temp_path, "wb") as out_file:
+                while True:
+                    chunk = response.read(1024 * 1024)
+                    if not chunk:
+                        break
+                    out_file.write(chunk)
+            os.replace(temp_path, target_path)
+            return True
+        except Exception as e:
+            print(f"  Attempt {attempt}/{retries} failed downloading {url}: {e}", file=sys.stderr)
+            if attempt < retries:
+                time.sleep(2 * attempt)
+            else:
+                raise
 
 def get_remote_head():
     cmd = ["git", "ls-remote", UPSTREAM_REPO, UPSTREAM_BRANCH]
@@ -48,15 +73,15 @@ def sync_data(root_dir, remote_sha, commit_file):
     
     url_agg = f"{RAW_BASE_URL}/amelag_aggregierte_kurve.tsv"
     print(f"  Downloading {url_agg}...")
-    urllib.request.urlretrieve(url_agg, agg_file)
+    download_file(url_agg, agg_file)
 
     url_sites = f"{RAW_BASE_URL}/amelag_einzelstandorte.tsv"
     print(f"  Downloading {url_sites}...")
-    urllib.request.urlretrieve(url_sites, sites_file)
+    download_file(url_sites, sites_file)
 
     print("Rebuilding dashboard static pages and data structures...")
     import build
-    build.build_data(root_dir)
+    build.build_all(root_dir)
 
     print(f"Recording upstream commit {remote_sha} into {commit_file}...")
     os.makedirs(os.path.dirname(commit_file), exist_ok=True)

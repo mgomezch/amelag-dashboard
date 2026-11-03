@@ -1372,9 +1372,8 @@ def generate_static_html(national_data, states_data, sites_index, root_dir=".", 
         f.write(html_content)
     print(f"{filename} successfully written in [{lang.upper()}].")
 
-if __name__ == "__main__":
-    import sys
-    root = sys.argv[1] if len(sys.argv) > 1 else "."
+def build_all(root="."):
+    """Build all data structures, SVG assets, and pre-rendered static HTML pages (DE and EN)."""
     nat, states, sites = build_data(root)
 
     # 1. Standalone SVG Assets (both DE and EN)
@@ -1399,3 +1398,9 @@ if __name__ == "__main__":
     generate_static_html(nat, states, sites, root_dir=root, lang="en", filename="en/index.html", path_prefix="../")
 
     print("Static build finished: index.html (DE), en.html (EN), en/index.html (EN) generated!")
+    return nat, states, sites
+
+if __name__ == "__main__":
+    import sys
+    root_arg = sys.argv[1] if len(sys.argv) > 1 else "."
+    build_all(root_arg)
